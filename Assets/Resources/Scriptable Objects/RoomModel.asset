@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91732902de3bc4753a50ffd24f24efc5, type: 3}
+  m_Name: RoomModel
+  m_EditorClassIdentifier: 
+  monstersSpawns: []
+  obstacles: []
+  floorTypes:
+  - {fileID: 1070732189299966, guid: ed5fcea1b58d5458d9eb191e41e60e97, type: 2}
+  - {fileID: 1050143255836918, guid: d8e550f57fac4489083e093c1e8eec56, type: 2}
+  - {fileID: 1091826612324802, guid: 79bf2945a2a984fc08078f88165c73c6, type: 2}
+  - {fileID: 1298524322082984, guid: bbbd9b9726e154b7ebca0cbfef854b34, type: 2}
+  - {fileID: 1507734905686952, guid: 159926e76e35645a7a700d73df558477, type: 2}
+  - {fileID: 1779653400003438, guid: 55123b79e8ddf426ea73addc6d12270a, type: 2}
+  - {fileID: 1834573320146118, guid: 6970f78f5a66c46f9bc349cfcaf5b4f4, type: 2}
+  - {fileID: 1851145379753942, guid: 4dcd0ec2c081b4ca4a6a8486fbf29a32, type: 2}
+  - {fileID: 1430933839764916, guid: 5e3aefdbd32764e0e92af64a2c0f07c9, type: 2}
+  - {fileID: 1563382039318526, guid: 06d9868d5d99047579b9a91ba8414115, type: 2}
+  - {fileID: 1155668109215184, guid: 3129f6dcb6fdb49e2a7672ce820a5557, type: 2}
+  - {fileID: 1720394982609388, guid: ca15a2dfa6a9c490abbdb2e89ee4a177, type: 2}
+  - {fileID: 1700470368442782, guid: a446e9987bd104aa4b7b7bf1e4ef6b08, type: 2}
+  - {fileID: 1671675598190468, guid: e45e5594f943d4873801d86256ee85b8, type: 2}
+  - {fileID: 1476573041792828, guid: d7c33dcb1a7284cc5b4c4973824195bd, type: 2}
+  - {fileID: 1492046789636572, guid: 0b3788a5b8f5b4cafaeb63e9c39b6e6b, type: 2}
+  floor: []
+  size: {x: 0, y: 0}
+  initialPoint: {x: 0, y: 0, z: 0}
