@@ -30,6 +30,6 @@ MonoBehaviour:
   - {fileID: 1671675598190468, guid: e45e5594f943d4873801d86256ee85b8, type: 2}
   - {fileID: 1476573041792828, guid: d7c33dcb1a7284cc5b4c4973824195bd, type: 2}
   - {fileID: 1492046789636572, guid: 0b3788a5b8f5b4cafaeb63e9c39b6e6b, type: 2}
-  floor: []
-  size: {x: 0, y: 0}
+  size: {x: 10, y: 10}
   initialPoint: {x: 0, y: 0, z: 0}
+  nextRoomPoint: {x: 5, y: 9, z: 0}

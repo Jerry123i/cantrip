@@ -21,11 +21,11 @@ GameObject:
   - component: {fileID: 4437368758540010}
   - component: {fileID: 212711351799025170}
   m_Layer: 0
-  m_Name: floor23b
+  m_Name: floorPathVerticalBlocked
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4437368758540010
 Transform:

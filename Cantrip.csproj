@@ -110,7 +110,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\RoomBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Level Generator\LevelBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Level Generator\LevelModel.cs" />
+    <Compile Include="Assets\Scripts\Level Generator\RoomBehaviour.cs" />
     <Compile Include="Assets\Scripts\Level Generator\RoomModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
