@@ -11,11 +11,30 @@ public class RoomModel : ScriptableObject
 
     [SerializeField]
     private GameObject[] floorTypes;
-    [SerializeField]
     private GameObject[] floor;
+    private GameObject exit;
     public Vector2 size;
 
     public Vector3 initialPoint;
+    public Vector3 nextRoomPoint;
+
+    // Magic number that gives the exact distance to put the exit.
+    private float distancePath = 0.773f;
+
+    private enum FLOORTYPES
+    {
+        BASE = 0,
+        DOWN = 1,
+		DOWNLEFT = 2,
+		DOWNRIGHT = 3,
+		LEFT = 4,
+        PATHHORIZONTALBLOCKED = 7,
+        PATHVERTICALBLOCKED = 9,
+		RIGHT = 10,
+        UP = 11,
+		UPLEFT = 12,
+		UPRIGHT = 13,
+    };
 
     void Awake()
     {
@@ -46,7 +65,6 @@ public class RoomModel : ScriptableObject
         {
             floor = new GameObject[(int)size.x * (int)size.y]; // START FLOOR
 
-            // CREATE WALKABLE PATH
             for (int i = 0; i < size.x; ++i)
             {
                 for (int j = 0; j < size.y; ++j)
@@ -55,49 +73,74 @@ public class RoomModel : ScriptableObject
                     Vector3 pos = new Vector3(initialPoint.x + i, initialPoint.y + j, initialPoint.z);
                     if (i > 0 && j > 0 && j < size.y - 1 && i < size.x - 1)
                     {
-                        floor[point] = Instantiate(floorTypes[0], pos, Quaternion.identity);
+                        // CREATE WALKABLE PATH
+                        floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.BASE], pos, Quaternion.identity);
                     }
                     else
                     {
-                        if (i == 0)
+                        if (i == (int)nextRoomPoint.x && j == (int)nextRoomPoint.y)
                         {
-                            if (j == 0)
+                            if (i > 0 && i < (int)size.x - 1)
                             {
-                                floor[point] = Instantiate(floorTypes[2], pos, Quaternion.identity);
+                                floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.BASE], pos, Quaternion.identity);
+                                exit = Instantiate(floorTypes[(int)FLOORTYPES.PATHVERTICALBLOCKED], pos + new Vector3(0, 0.773f, 0), Quaternion.identity);
+								exit.transform.parent = parent;
+							}
+                            else if (j > 0 && j < (int)size.y - 1) {
+								floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.BASE], pos, Quaternion.identity);
+								exit = Instantiate(floorTypes[(int)FLOORTYPES.PATHHORIZONTALBLOCKED], pos + new Vector3(0.773f, 0, 0), Quaternion.identity);
+                                exit.transform.parent = parent;
+                            }
+                            else {
+                                Debug.Log("error, invalid position to path");
+                            }
+                        }
+                        else
+                        {
+                            // CREATING BORDERS
+                            if (i == 0)
+                            {
+                                if (j == 0)
+                                {
+                                    floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.DOWNLEFT], pos, Quaternion.identity);
+                                }
+                                else if (j == (int)size.y - 1)
+                                {
+                                    floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.UPLEFT], pos, Quaternion.identity);
+                                }
+                                else
+                                {
+                                    floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.LEFT], pos, Quaternion.identity);
+                                }
+                            }
+                            else if (i == (int)size.x - 1)
+                            {
+                                if (j == 0)
+                                {
+                                    floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.DOWNRIGHT], pos, Quaternion.identity);
+                                }
+                                else if (j == (int)size.y - 1)
+                                {
+                                    floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.UPRIGHT], pos, Quaternion.identity);
+                                }
+                                else
+                                {
+                                    floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.RIGHT], pos, Quaternion.identity);
+                                }
+                            }
+                            else if (j == 0)
+                            {
+                                floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.DOWN], pos, Quaternion.identity);
                             }
                             else if (j == (int)size.y - 1)
                             {
-                                floor[point] = Instantiate(floorTypes[12], pos, Quaternion.identity);
+                                floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.UP], pos, Quaternion.identity);
                             }
-                            else {
-                                floor[point] = Instantiate(floorTypes[4], pos, Quaternion.identity);
-                            }
-                        }
-                        else if (i == (int)size.x - 1) {
-							if (j == 0)
-							{
-								floor[point] = Instantiate(floorTypes[3], pos, Quaternion.identity);
-							}
-							else if (j == (int)size.y - 1)
-							{
-								floor[point] = Instantiate(floorTypes[13], pos, Quaternion.identity);
-							}
-							else
-							{
-								floor[point] = Instantiate(floorTypes[10], pos, Quaternion.identity);
-							}
-                        }
-                        else if (j == 0) {
-                            floor[point] = Instantiate(floorTypes[1], pos, Quaternion.identity);
-                        }
-                        else if (j == (int)size.y - 1) {
-							floor[point] = Instantiate(floorTypes[11], pos, Quaternion.identity);
 						}
 					}
 					floor[point].transform.parent = parent;
                 }
 			}
-
 		}
     }
 }
