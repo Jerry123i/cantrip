@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RoomModel", menuName = "Generator/Room", order = 1)]
 public class RoomModel : ScriptableObject
 {
-    public static int[] maxSize = { 20, 20 }, minSize = { 3, 3 };
+    public static int[] maxSize = { 19, 19 }, minSize = { 10, 10 };
 
     public GameObject[] monstersSpawns, obstacles;
 
@@ -13,6 +13,7 @@ public class RoomModel : ScriptableObject
     private GameObject[] floorTypes;
     private GameObject[] floor;
     private GameObject exit;
+    private GameObject[] path;
 
     public int[] size;
     public Vector3 initialPoint;
@@ -29,7 +30,9 @@ public class RoomModel : ScriptableObject
 		DOWNLEFT = 2,
 		DOWNRIGHT = 3,
 		LEFT = 4,
-        PATHHORIZONTALBLOCKED = 7,
+		PATHHORIZONTAL = 5,
+		PATHHORIZONTALBLOCKED = 7,
+        PATHVERTICAL = 8,
         PATHVERTICALBLOCKED = 9,
 		RIGHT = 10,
         UP = 11,
@@ -85,7 +88,7 @@ public class RoomModel : ScriptableObject
                     }
                     else
                     {
-                        Debug.Log(i + " - " + (int)previousRoomPoint[0] + " - " + j + " - " + (int)previousRoomPoint[1]);
+                        //Debug.Log(i + " - " + (int)previousRoomPoint[0] + " - " + j + " - " + (int)previousRoomPoint[1]);
                         if (i == (int)previousRoomPoint[0] && j == (int)previousRoomPoint[1])
                         {
                             floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.BASE], pos, Quaternion.identity);
@@ -102,7 +105,7 @@ public class RoomModel : ScriptableObject
                                 else if (j > 0 && j < size[1] - 1)
                                 {
                                     floor[point] = Instantiate(floorTypes[(int)FLOORTYPES.BASE], pos, Quaternion.identity);
-                                    exit = Instantiate(floorTypes[(int)FLOORTYPES.PATHHORIZONTALBLOCKED], pos + new Vector3((i == 0) ? -0.773f : 0.773f, 0, 0), Quaternion.identity);
+                                    exit = Instantiate(floorTypes[(int)FLOORTYPES.PATHHORIZONTALBLOCKED], pos + new Vector3((i == 0) ? -1.224f : 0.773f, 0, 0), Quaternion.identity);
                                     exit.transform.parent = parent;
                                 }
                                 else
@@ -158,5 +161,20 @@ public class RoomModel : ScriptableObject
                 }
 			}
 		}
+    }
+
+    public void CreatePathBetween(Transform parent, int count, int dir) {
+        path = new GameObject[count];
+        for (int i = 0; i < count; i++)
+        {
+            if (dir == 0 || dir == 2)
+            {
+                path[i] = Instantiate(floorTypes[(int)FLOORTYPES.PATHVERTICAL], initialPoint + new Vector3(nextRoomPoint.x, (dir == 0) ? 1.0f * (i + 1) + size[1] : -1.0f * (i + 2), 0.0f), Quaternion.identity);
+            }
+            else {
+                path[i] = Instantiate(floorTypes[(int)FLOORTYPES.PATHHORIZONTAL], initialPoint + new Vector3((dir == 1) ? 1.0f * (i + 1) + size[0] : -1.0f * (i + 2), nextRoomPoint.y, 0.0f), Quaternion.identity);
+			}
+            path[i].transform.parent = parent;
+        }
     }
 }
