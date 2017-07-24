@@ -1,49 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour {
 
     public float movSpeed;
+    public float maxHP;
 
-	// Use this for initialization
+    private float hp;
+
 	void Start () {
-        
+        hp = maxHP;
 	}
 	
-	// Update is called once per frame
 	void Update () {
         Move();
         Rotate();
         if (Input.GetMouseButtonDown(0))
         {
-            MainAttack();
+            MainCast();
         }
         else if (Input.GetMouseButtonDown(1))
         {
-            AltAttack();
+            AltCast();
         }
 	}
 
     void Rotate ()
     {
         // A orientação do player segue a posição do mouse
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(transform.localPosition);
+        Vector2 mousePos = Input.mousePosition;
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(transform.localPosition);
         Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
         float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90.0f);
         
     }
 
-    void MainAttack ()
+    // Funções só pro prótipo com um inimigo
+    void MainCast ()
     {
-        Debug.Log(Input.mousePosition);
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(mousePos);
     }
 
-    void AltAttack ()
+    void AltCast ()
     {
-        Debug.Log(Input.mousePosition);
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(mousePos);
     }
 
     void Move ()
@@ -52,5 +57,10 @@ public class PlayerBehaviour : MonoBehaviour {
         float dx = Input.GetAxis("Horizontal") * movSpeed * Time.deltaTime;
         float dy = Input.GetAxis("Vertical") * movSpeed * Time.deltaTime;
         transform.Translate(dx, dy, 0, Camera.main.transform);
+    }
+
+    public void TakeDamage (float damageTaken)
+    {
+        hp -= damageTaken;
     }
 }
