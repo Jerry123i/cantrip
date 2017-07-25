@@ -75,7 +75,7 @@ public class PlayerBehaviour : MonoBehaviour {
         }
         else
         {
-            SceneManager.LoadScene("example");
+            // SceneManager.LoadScene("example");
         }
         Debug.Log(hp);
     }
