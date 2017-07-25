@@ -7,11 +7,14 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public float movSpeed;
     public float maxHP;
+    public float debugDamage;
 
     private float hp;
+    private bool isDead;
 
 	void Start () {
         hp = maxHP;
+        isDead = false;
 	}
 	
 	void Update () {
@@ -42,7 +45,11 @@ public class PlayerBehaviour : MonoBehaviour {
     void MainCast ()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(mousePos);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+        if (hit && hit.collider.tag == "Enemy")
+        {
+            hit.collider.GetComponent<SandbagController>().TakeDamage(debugDamage);
+        }
     }
 
     void AltCast ()
@@ -61,6 +68,15 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void TakeDamage (float damageTaken)
     {
-        hp -= damageTaken;
+        if (!isDead)
+        {
+            hp -= damageTaken;
+            if (hp <= 0) isDead = true;
+        }
+        else
+        {
+            SceneManager.LoadScene("example");
+        }
+        Debug.Log(hp);
     }
 }

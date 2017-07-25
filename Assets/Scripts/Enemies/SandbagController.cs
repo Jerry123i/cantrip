@@ -6,6 +6,7 @@ public class SandbagController : MonoBehaviour {
 
     public float speed;
     public float maxHP;
+    public float debugDamage;
 
     private float hp;
     private GameObject player;
@@ -33,6 +34,19 @@ public class SandbagController : MonoBehaviour {
     public void TakeDamage (float damageTaken)
     {
         hp -= damageTaken;
+        Debug.Log(hp);
+        if (hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            collision.GetComponent<PlayerBehaviour>().TakeDamage(debugDamage);
+        }
     }
 
 }
