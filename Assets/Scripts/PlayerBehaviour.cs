@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour {
+
+    public GameObject[] spellPrefab;
+    public Transform targetTransform;
+    public Text texto;
+
+    public int spellSelector;
 
     public float movSpeed;
     public float maxHP;
@@ -28,6 +35,22 @@ public class PlayerBehaviour : MonoBehaviour {
         {
             AltCast();
         }
+
+        if (Input.GetKeyDown("q"))
+        {
+            if (spellSelector > 0)
+            {
+                spellSelector--;
+            }
+        }
+        if (Input.GetKeyDown("e"))
+        {
+            if (spellSelector < spellPrefab.Length - 1)
+            {
+                spellSelector++;
+            }
+        }
+        texto.text = spellSelector.ToString();
 	}
 
     void Rotate ()
@@ -44,11 +67,23 @@ public class PlayerBehaviour : MonoBehaviour {
     // Funções só pro prótipo com um inimigo
     void MainCast ()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        if (hit && hit.collider.tag == "Enemy")
+        if(spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Bomb)
         {
-            hit.collider.GetComponent<SandbagController>().TakeDamage(debugDamage);
+            Vector3 mouse;
+            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);            
+
+            Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
+
+        }
+
+        else if (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Wave)
+        {
+            Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
+        }
+
+        else if (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Shot)
+        {
+            Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation);
         }
     }
 
@@ -72,10 +107,6 @@ public class PlayerBehaviour : MonoBehaviour {
         {
             hp -= damageTaken;
             if (hp <= 0) isDead = true;
-        }
-        else
-        {
-            // SceneManager.LoadScene("example");
         }
         Debug.Log(hp);
     }
