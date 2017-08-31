@@ -16,7 +16,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public float maxHP;
     public float debugDamage;
 
-    private float hp;
+    public float hp;
     private bool isDead;
 
 	void Start () {

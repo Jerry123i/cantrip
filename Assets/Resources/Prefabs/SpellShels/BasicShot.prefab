@@ -79,17 +79,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9928a2c2bd3427479eb186ba682686c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   type: 0
-  slowDuration: 0
-  slowPower: 0
+  slowDuration: 2
+  slowPower: 0.2
   snareDuration: 0
   poisonDuration: 0
   poisonPower: 0
-  critMultiplier: 0
+  critMultiplier: 1000
+  critChance: 5
   lifeSteal: 0
-  damage: 25
+  damage: 1
   extraArmorDamage: 0
-  armorPierce: 0
+  armorPierce: 1
   trample: 0
   area: 0
   number: 0

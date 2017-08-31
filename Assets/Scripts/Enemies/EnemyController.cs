@@ -17,6 +17,9 @@ public class EnemyController : MonoBehaviour {
     public bool debuffSlow;
     public bool debuffPoison;
     public bool debuffSnare;
+
+    public bool onSnareCD;
+    public bool onArmorCD;
     
     public int currentArmor;
     public float currentSpeed;
@@ -27,6 +30,8 @@ public class EnemyController : MonoBehaviour {
     public float initialSpeed;
 
     public float debugDamage;
+    float armorInterval = 0.75f;
+    float snareInterval = 5.0f;
 
     
     private GameObject player;
@@ -83,15 +88,12 @@ public class EnemyController : MonoBehaviour {
 
     public void TakeDamage (float damageTaken)
     {
-        if (currentArmor <= 0)
-        {
-            currentHp -= damageTaken;            
-        }
-        else
-        {
-            currentArmor--;
-        }
-        
+        currentHp -= damageTaken;
+    }
+
+    public void LoseArmor(int lostArmor)
+    {
+        currentArmor -= lostArmor;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -125,10 +127,29 @@ public class EnemyController : MonoBehaviour {
     public IEnumerator RoutineSnare(float snareDuration)
     {
         debuffSnare = true;
-        Debug.Log("Snare: " + snareDuration.ToString() + "s");
+        onSnareCD = true;
         yield return new WaitForSeconds(snareDuration);
         Debug.Log("End Snare");
         debuffSnare = false;
+        StartCoroutine(SnareCooldown());
+    }
+
+    public IEnumerator ArmorCooldown()
+    {
+        onArmorCD = true;
+        yield return new WaitForSeconds(armorInterval);
+        onArmorCD = false;
+    }
+
+    public IEnumerator SnareCooldown()
+    {
+        yield return new WaitForSeconds(snareInterval);
+        onSnareCD = false;
+    }
+
+    public void PullArmor()
+    {
+        StartCoroutine(ArmorCooldown());
     }
 
     public void PullSlow(float duration)
