@@ -78,7 +78,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797fcdb35dd7e93469b2008dd5ca81ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellPrefab: []
+  targetTransform: {fileID: 0}
+  texto: {fileID: 0}
+  spellSelector: 0
   movSpeed: 3
+  maxHP: 0
+  debugDamage: 0
+  angle: 0
+  hp: 0
 --- !u!212 &212656024503369528
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -119,3 +127,5 @@ SpriteRenderer:
   m_Size: {x: 4.5, y: 4.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

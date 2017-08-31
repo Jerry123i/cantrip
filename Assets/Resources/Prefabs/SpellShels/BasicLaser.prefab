@@ -105,7 +105,7 @@ MonoBehaviour:
   extraArmorDamage: 0
   armorPierce: 0
   trample: 0
-  area: 4
+  area: 2.5
   number: 0
 --- !u!212 &212412583009329488
 SpriteRenderer:

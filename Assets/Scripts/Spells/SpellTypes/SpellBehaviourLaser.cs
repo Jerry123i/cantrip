@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpellBehaviourLaser : MonoBehaviour {
 
     public SpellSatistics stats;
-    bool isCritMode;
+    //bool isCritMode;
 
     Transform box;
     
@@ -32,7 +32,10 @@ public class SpellBehaviourLaser : MonoBehaviour {
             box.localPosition += new Vector3(0.0f, 0.025f, 0.0f);
         }
 
-
+        if (Input.GetMouseButtonUp(0))
+        {
+            Destroy(this.gameObject);
+        }
     }
         
     void OnTriggerEnter2D(Collider2D cool)
