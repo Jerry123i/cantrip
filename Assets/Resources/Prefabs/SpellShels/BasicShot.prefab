@@ -94,7 +94,7 @@ MonoBehaviour:
   armorPierce: 1
   trample: 0
   area: 0
-  number: 0
+  number: 2
 --- !u!114 &114727210304011866
 MonoBehaviour:
   m_ObjectHideFlags: 1

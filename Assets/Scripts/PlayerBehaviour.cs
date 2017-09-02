@@ -56,10 +56,12 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         Vector3 mouse;
         mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        
         spellSelector = a;
+        SpellSatistics spell;
+        spell = spellPrefab[spellSelector].GetComponent<SpellSatistics>();
 
-        switch (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type)
+        switch (spell.type)
         {
             
     
@@ -72,7 +74,7 @@ public class PlayerBehaviour : MonoBehaviour {
                 break;
 
             case SpellSatistics.SpellType.Shot:
-                Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation);
+                Shot();
                 break;
 
             case SpellSatistics.SpellType.Trap:
@@ -95,45 +97,7 @@ public class PlayerBehaviour : MonoBehaviour {
                 Debug.Log("Tipo não implementado");
                 break;
         }
-
-        /*
-        //Bomb
-        if(spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Bomb)
-        {         
-
-            Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
-        }
-
-        //Wave
-        else if (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Wave)
-        {
-            Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
-        }
-
-        //Shot
-        else if (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Shot)
-        {
-            Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation);
-        }
-
-        //Trap
-        else if (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Trap)
-        {
-            Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
-        }
-
-        //Dash
-        else if (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Dash)
-        {
-            Dash();
-        }
-
-        //Teleport
-        else if (spellPrefab[spellSelector].GetComponent<SpellSatistics>().type == SpellSatistics.SpellType.Teleport)
-        {
-            Teleport();
-        }
-        */
+        
     }
 
     void Move ()
@@ -190,6 +154,31 @@ public class PlayerBehaviour : MonoBehaviour {
 
         this.gameObject.transform.Translate(Vector3.up * teleportDistance);
         Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
+    }
+
+    public void Shot()
+    {
+        SpellSatistics spell;
+        spell = spellPrefab[spellSelector].GetComponent<SpellSatistics>();
+
+        float angle;
+
+        if (spell.number > 1)
+        {
+            angle = this.transform.eulerAngles.z - (((spell.number - 1) * 15.0f)/2.0f);
+            
+            for (int i = 0; i < spell.number; i++)
+            {
+                Debug.Log("Z:" + targetTransform.rotation.eulerAngles.z);
+                Instantiate(spellPrefab[spellSelector], targetTransform.position, Quaternion.Euler(0,0, angle + (15.0f*i)));
+            }
+        }
+
+        else
+        {
+            Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation);
+        }
+        
     }
 
 }

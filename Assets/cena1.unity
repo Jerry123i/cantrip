@@ -164,7 +164,7 @@ Prefab:
         type: 2}
       propertyPath: spellPrefab.Array.data[0]
       value: 
-      objectReference: {fileID: 1212902994430560, guid: 3f92dc7ab175f864b99b080663dcc04e,
+      objectReference: {fileID: 1848971149373246, guid: 85a0422a287cbde479fa2158fd3e1d32,
         type: 2}
     - target: {fileID: 114023956216212918, guid: e0bd64366b63305419a4c8976a8360b5,
         type: 2}
