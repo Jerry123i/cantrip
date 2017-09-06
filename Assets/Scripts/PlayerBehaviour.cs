@@ -16,6 +16,8 @@ public class PlayerBehaviour : MonoBehaviour {
     public float maxHP;
     public float debugDamage;
 
+	public float shotSpreadAngle;
+
     public float angle;
 
     public float hp;
@@ -165,12 +167,12 @@ public class PlayerBehaviour : MonoBehaviour {
 
         if (spell.number > 1)
         {
-            angle = this.transform.eulerAngles.z - (((spell.number - 1) * 15.0f)/2.0f);
+            angle = this.transform.eulerAngles.z - (((spell.number - 1) * shotSpreadAngle)/2.0f);
             
             for (int i = 0; i < spell.number; i++)
             {
                 Debug.Log("Z:" + targetTransform.rotation.eulerAngles.z);
-                Instantiate(spellPrefab[spellSelector], targetTransform.position, Quaternion.Euler(0,0, angle + (15.0f*i)));
+                Instantiate(spellPrefab[spellSelector], targetTransform.position, Quaternion.Euler(0,0, angle + (shotSpreadAngle*i)));
             }
         }
 
