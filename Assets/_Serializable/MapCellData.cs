@@ -39,6 +39,8 @@ public class MapCellDataCustomEditor : Editor {
     public override void OnInspectorGUI() {
         MapCellData mcd = (MapCellData)target;
 
+        if (mcd.limites == null) mcd.limites = new Limite[4];
+
         GUILayout.Label("Cell Name: " + mcd.name);
         GUILayout.Space(8);
         GUILayout.Label("Dimensões: " + mcd.dimension_x + "x" + mcd.dimension_y);
