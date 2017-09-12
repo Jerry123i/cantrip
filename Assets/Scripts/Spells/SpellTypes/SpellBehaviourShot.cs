@@ -40,6 +40,12 @@ public class SpellBehaviourShot : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D cool)
     {
+		Debug.Log(cool.tag);
+
+		if (cool.tag == "Wall") {
+			Destroy(this.gameObject);
+		}
+
         if(cool.GetComponent<EnemyController>() != null)
         {
             EnemyController hit;
@@ -101,5 +107,5 @@ public class SpellBehaviourShot : MonoBehaviour {
 
         }
     }
-
+	
 }

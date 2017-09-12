@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4569305182907290}
   - component: {fileID: 212327149704419066}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,3 +80,5 @@ SpriteRenderer:
   m_Size: {x: 4.5, y: 4.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

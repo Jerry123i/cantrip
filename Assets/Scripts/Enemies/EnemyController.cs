@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Pathfinding;
 
 public class EnemyController : MonoBehaviour {
 
     public CurrentEffects currentEffects;
+	public AIPath aiControler;
 
     public Image hpBar;
     public Image armorBar;
@@ -37,6 +39,7 @@ public class EnemyController : MonoBehaviour {
     private GameObject player;
 
     void Start () {
+		aiControler = this.gameObject.GetComponent<AIPath>();
         player = GameObject.FindGameObjectWithTag("Player");
         currentHp = maxHP;
         currentArmor = initialArmor;
@@ -51,6 +54,8 @@ public class EnemyController : MonoBehaviour {
 	
 	void Update () {
 
+		aiControler.speed = currentSpeed;
+
         if (initialArmor > 0)
         {
             armorBar.fillAmount = (float)currentArmor/initialArmor;
@@ -59,7 +64,7 @@ public class EnemyController : MonoBehaviour {
 
         if (!debuffSnare)
         {
-            Move();
+            //Move();
         }
 
 
