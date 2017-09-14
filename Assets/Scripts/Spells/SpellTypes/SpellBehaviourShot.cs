@@ -28,7 +28,7 @@ public class SpellBehaviourShot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        gameObject.GetComponent<Transform>().Translate(Vector3.up * projectileSpeed);
+        gameObject.GetComponent<Transform>().Translate(Vector3.up * projectileSpeed * Time.deltaTime);
 
         clock += Time.deltaTime;
         if (clock >= 5.0f)
@@ -40,8 +40,6 @@ public class SpellBehaviourShot : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D cool)
     {
-		Debug.Log(cool.tag);
-
 		if (cool.tag == "Wall") {
 			Destroy(this.gameObject);
 		}
@@ -80,10 +78,10 @@ public class SpellBehaviourShot : MonoBehaviour {
             {
                 if(hit.currentEffects.poison > 0)
                 {
-                    hit.StopCoroutine("RoutinePoison");
+					hit.CallStopPoison();
                 }
                 hit.currentEffects.poison = stats.poisonPower;
-                StartCoroutine(hit.RoutinePoison(stats.poisonDuration));
+				hit.PullPoison(stats.poisonDuration);
             }
 
             //Snare
@@ -91,9 +89,9 @@ public class SpellBehaviourShot : MonoBehaviour {
             {
                 if (hit.debuffSnare)
                 {
-                    hit.StopCoroutine("RoutineSnare");
+					hit.CallStopSnare();
                 }
-                StartCoroutine(hit.RoutineSnare(stats.snareDuration));
+				hit.PullSnare(stats.snareDuration);
             }
 
             if (trample <= 0)

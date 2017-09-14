@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 61324752734940382}
   - component: {fileID: 114159458215788980}
   - component: {fileID: 114727210304011866}
+  - component: {fileID: 50978160361230526}
   m_Layer: 0
   m_Name: BasicShot
   m_TagString: Untagged
@@ -43,6 +44,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50978160361230526
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848971149373246}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!61 &61324752734940382
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -81,17 +102,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   type: 0
-  slowDuration: 2
-  slowPower: 0.2
-  snareDuration: 0
+  slowDuration: 0
+  slowPower: 0
+  snareDuration: 3
   poisonDuration: 0
   poisonPower: 0
-  critMultiplier: 2
-  critChance: 5
+  critMultiplier: 0
+  critChance: 0
   lifeSteal: 0
-  damage: 10
-  extraArmorDamage: 1
-  armorPierce: 2
+  damage: 1
+  extraArmorDamage: 0
+  armorPierce: 0
   trample: 0
   area: 0
   number: 1
@@ -107,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 114159458215788980}
-  projectileSpeed: 0.5
+  projectileSpeed: 15
   trample: 0
   clock: 0
 --- !u!212 &212519937264831562

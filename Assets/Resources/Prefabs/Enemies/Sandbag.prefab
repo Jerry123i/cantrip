@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224139403668022734}
   - component: {fileID: 222279115498732830}
   - component: {fileID: 114250092968651898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: barraHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 223664365218677826}
   - component: {fileID: 114528396525147414}
   - component: {fileID: 114790929677452140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 58786830568930020}
   - component: {fileID: 50472414762266054}
   - component: {fileID: 114549863245349704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sandbag
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 224844420975102338}
   - component: {fileID: 222656563678472532}
   - component: {fileID: 114260610291545946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: barraArmor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,11 +198,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentEffects: {fileID: 114549863245349704}
+  aiControler: {fileID: 0}
   hpBar: {fileID: 114250092968651898}
   armorBar: {fileID: 114260610291545946}
   debuffSlow: 0
   debuffPoison: 0
   debuffSnare: 0
+  onSnareCD: 0
+  onArmorCD: 0
   currentArmor: 0
   currentSpeed: 0
   currentHp: 0
@@ -210,6 +213,7 @@ MonoBehaviour:
   initialArmor: 5
   initialSpeed: 0.8
   debugDamage: 10
+  player: {fileID: 0}
 --- !u!114 &114528396525147414
 MonoBehaviour:
   m_ObjectHideFlags: 1

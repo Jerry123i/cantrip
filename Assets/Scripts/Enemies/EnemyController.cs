@@ -23,9 +23,12 @@ public class EnemyController : MonoBehaviour {
     public bool onSnareCD;
     public bool onArmorCD;
     
+	[HideInInspector]
     public int currentArmor;
-    public float currentSpeed;
-    public float currentHp;
+	[HideInInspector]
+	public float currentSpeed;
+	[HideInInspector]
+	public float currentHp;
 
     public float maxHP;
     public int initialArmor;
@@ -36,14 +39,17 @@ public class EnemyController : MonoBehaviour {
     float snareInterval = 5.0f;
 
     
-    private GameObject player;
+    public GameObject player;
+	private Rigidbody2D rb;
 
-    void Start () {
+     virtual public void Start () {
 		aiControler = this.gameObject.GetComponent<AIPath>();
         player = GameObject.FindGameObjectWithTag("Player");
+		aiControler.target = player.transform;
         currentHp = maxHP;
         currentArmor = initialArmor;
         currentSpeed = initialSpeed;
+		rb = GetComponent<Rigidbody2D>();
 
         if(initialArmor == 0)
         {
@@ -52,7 +58,7 @@ public class EnemyController : MonoBehaviour {
 
 	}
 	
-	void Update () {
+	virtual public void Update () {
 
 		aiControler.speed = currentSpeed;
 
@@ -87,7 +93,8 @@ public class EnemyController : MonoBehaviour {
         dir = player.transform.position - transform.position;
         if (dir.magnitude > 0.001f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (currentSpeed * Time.deltaTime));
+			rb.MovePosition(rb.position + dir.normalized * currentSpeed * Time.fixedDeltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, (currentSpeed * Time.deltaTime));
         }
     }
 
@@ -121,6 +128,7 @@ public class EnemyController : MonoBehaviour {
         currentSpeed = initialSpeed;
     }
 
+
     public IEnumerator RoutinePoison(float poisonDuration)
     {
         debuffPoison = true;
@@ -133,10 +141,15 @@ public class EnemyController : MonoBehaviour {
     {
         debuffSnare = true;
         onSnareCD = true;
+		aiControler.canMove = false;
+		rb.bodyType = RigidbodyType2D.Kinematic;
+		Debug.Log("Snare "+snareDuration.ToString()+"s");
         yield return new WaitForSeconds(snareDuration);
         Debug.Log("End Snare");
         debuffSnare = false;
-        StartCoroutine(SnareCooldown());
+		aiControler.canMove = true;
+		rb.bodyType = RigidbodyType2D.Dynamic;
+		StartCoroutine(SnareCooldown());
     }
 
     public IEnumerator ArmorCooldown()

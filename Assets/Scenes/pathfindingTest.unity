@@ -95,7 +95,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.2
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -103,7 +103,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.06666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -874,49 +874,45 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 6.7
       objectReference: {fileID: 0}
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_LocalPosition.y
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4117286557005370, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+    - target: {fileID: 4409290647102932, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114989931120150576, guid: 544cb3b174f474c4192c7deb591c33b3,
+    - target: {fileID: 114351721638475810, guid: 7358eaab13bad224e8c6125123c23f8c,
         type: 2}
       propertyPath: target
       value: 
       objectReference: {fileID: 1678369120}
-    - target: {fileID: 1725158381946684, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 544cb3b174f474c4192c7deb591c33b3, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &526627919
 Prefab:
@@ -1011,6 +1007,11 @@ Prefab:
     - target: {fileID: 1155668109215184, guid: 3129f6dcb6fdb49e2a7672ce820a5557, type: 2}
       propertyPath: m_Name
       value: floorRight (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 50630335786222016, guid: 3129f6dcb6fdb49e2a7672ce820a5557,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3129f6dcb6fdb49e2a7672ce820a5557, type: 2}
@@ -2348,7 +2349,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -2492,10 +2493,10 @@ Rigidbody2D:
   m_GameObject: {fileID: 1678369116}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 1000000
+  m_LinearDrag: 1000000
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}

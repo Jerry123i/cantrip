@@ -52,7 +52,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 114465704084351634}
-  maxDuration: 0.15
+  maxDuration: 0.2
 --- !u!114 &114465704084351634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
   slowDuration: 0
   slowPower: 0
   snareDuration: 0
-  poisonDuration: 1
+  poisonDuration: 10
   poisonPower: 200
   critMultiplier: 0
   critChance: 0
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e2ba2a451bfe41b448940ae459340bc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
