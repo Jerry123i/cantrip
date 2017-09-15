@@ -10,49 +10,59 @@ public class BasicRangedEnemyScript : EnemyController {
 	public GameObject aimObject;
 	public bool isShooting;
 
-	public IEnumerator currentAtackRoutine;
+    float clock;
 
 	public override void Start() {
 		base.Start();
 	}
 
 	public override void Update() {
-		base.Update();		
+		base.Update();
 
-		if (SearchPlayerWide() && !isShooting) {
-			aiControler.canMove = false;
-			RotateToPlayer();
-			isShooting = true;
-		} 
-		else if (!isShooting) {
-			aiControler.canMove = true;
-			isShooting = false;
-			if(currentAtackRoutine != null) {
-				StopCoroutine(currentAtackRoutine);
-				currentAtackRoutine = null;
-			}
+        
 
-		}
+        if (SearchPlayerWide())
+        {
+            isShooting = true;
+            aiControler.canMove = false;
+        }
+        else
+        {
+            isShooting = false;
+            aiControler.canMove = true;
+            clock = 0.0f;
+        }
 
-		if (isShooting) {
-			if(currentAtackRoutine == null) {
-				currentAtackRoutine = RangedAtack();
-				StartCoroutine(currentAtackRoutine);
-			}
-		}
+        if (isShooting)
+        {
+
+            RotateToPlayer();
+
+            clock += Time.deltaTime;
+            if (clock>= 1/atkSpeed)
+            {
+                Shot();
+            }
+        }
 
 	}
+
+    void Shot()
+    {
+        Instantiate(projectile, aimObject.transform.position, this.transform.rotation);
+        clock = 0.0f;
+    }
 
 	void RotateToPlayer() {
 
-		Vector3 rotateTarget;
+        Vector3 direcao;
+        float angle;
+        direcao = player.transform.position - transform.position;
+        angle = (Mathf.Atan2(direcao.y, direcao.x) * Mathf.Rad2Deg) - 90.0f;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime *currentSpeed* 3.0f);
 
-		rotateTarget = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, -10.0f);
-		Quaternion rot = Quaternion.LookRotation(transform.position - rotateTarget, Vector3.forward);
-		transform.rotation = rot;
-		transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
-
-	}
+    }
 	
 
 	bool SearchPlayerWide() {
@@ -71,7 +81,7 @@ public class BasicRangedEnemyScript : EnemyController {
 		for (int i = 0; i < x; i++) {
 
 			rayOrigin = aimObject.transform.position;
-
+            //Atira raios em todas as direções
 			if (i < x / 4) {
 				rayDirection = aimObject.transform.up * a + aimObject.transform.right * b;
 			} 			
@@ -104,28 +114,38 @@ public class BasicRangedEnemyScript : EnemyController {
 			
 			RaycastHit2D[] ray;
 
-			if (a>=x/6 && (i<x/4 || i>= 3 * x / 4)) {
+            //Determina o "cone" válido de procura do inimigo
+			if (a>=x/14 && (i<x/8 || i>= 3 * x / 4)) {
 				Debug.DrawRay(rayOrigin, rayDirection, Color.blue);
 				ray = Physics2D.RaycastAll(rayOrigin, rayDirection, atackRange);
-				if (ray.Length > 1) {
-					if (ray[0].transform != null) {
-						if (ray[0].transform.gameObject.tag == "Player") {
-							Debug.Log("Player found");
-							return true;
-						}
-					}
-				}
-			}			
-		}
+                //Pega todos os objetos encontrados no Raycast
+                    //Procura até ver uma parede ou o jogador
+                
+                for(int j = 0; j < ray.Length; j++)
+                {
+                    if (ray[j].transform != null)
+                    {
+                        if(ray[j].transform.gameObject.tag == "Player")
+                        {
+                            return true;
+                        }
+                        if(ray[j].transform.gameObject.tag == "Wall")
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
 		return false;
 
 	}
 
-	public IEnumerator RangedAtack() {
+	/*public IEnumerator RangedAtack() {
 		Instantiate(projectile, aimObject.transform.position, aimObject.transform.rotation);
 		yield return new WaitForSeconds(1 / atkSpeed);
 		StartCoroutine(currentAtackRoutine);
-	}
+	}*/
 
 }
