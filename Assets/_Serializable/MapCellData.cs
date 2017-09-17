@@ -14,7 +14,7 @@ public enum Tile {
 public enum Limite {PAREDE, PORTA, CONEXAO}
 
 public struct EnemySpawnerData {
-	EnemySpawner es;
+	//EnemySpawner es;
 	int x, y;
 }
 

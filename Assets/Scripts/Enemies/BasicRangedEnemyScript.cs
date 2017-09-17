@@ -9,8 +9,9 @@ public class BasicRangedEnemyScript : EnemyController {
 	public float atkSpeed;
 	public GameObject aimObject;
 	public bool isShooting;
+    public int searchRange=14;
 
-    float clock;
+    public float clock;
 
 	public override void Start() {
 		base.Start();
@@ -47,13 +48,13 @@ public class BasicRangedEnemyScript : EnemyController {
 
 	}
 
-    void Shot()
+    public void Shot()
     {
         Instantiate(projectile, aimObject.transform.position, this.transform.rotation);
         clock = 0.0f;
     }
 
-	void RotateToPlayer() {
+	virtual public void RotateToPlayer() {
 
         Vector3 direcao;
         float angle;
@@ -65,11 +66,12 @@ public class BasicRangedEnemyScript : EnemyController {
     }
 	
 
-	bool SearchPlayerWide() {
+	virtual public bool SearchPlayerWide() {
 		int x = 32;
 		int a;
 		int b;
-
+        bool playerFound=false;
+                
 		x = (x * 4) - 4;
 
 		a = (x / 4) - 1;
@@ -82,52 +84,58 @@ public class BasicRangedEnemyScript : EnemyController {
 
 			rayOrigin = aimObject.transform.position;
             //Atira raios em todas as direções
-			if (i < x / 4) {
-				rayDirection = aimObject.transform.up * a + aimObject.transform.right * b;
-			} 			
-			else if (i < 2 * x / 4) {
+            if (i < x / 4)
+            {
+                rayDirection = aimObject.transform.up * a + aimObject.transform.right * b;
+            }
+            else if (i < 2 * x / 4)
+            {
 
-				if (i == x / 4) {
-					a = (x / 4) - 1;
-					b = 0;
-				}
+                if (i == x / 4)
+                {
+                    a = (x / 4) - 1;
+                    b = 0;
+                }
 
-				rayDirection = Vector3.down * a + Vector3.right * b;
-			}
-			else if (i < 3 * x / 4) {
-				if (i == x * 2 / 4) {
-					a = (x / 4) - 1;
-					b = 0;
-				}
-				rayDirection = Vector3.down * a + Vector3.left * b;
-			}
-			else {
-				if (i == x * 3 / 4) {
-					a = (x / 4) - 1;
-					b = 0;
-				}
-				rayDirection = aimObject.transform.up * a + aimObject.transform.right * -b;
-			}
+                rayDirection = aimObject.transform.up * -a + aimObject.transform.right * b;
+            }
+            else if (i < 3 * x / 4)
+            {
+                if (i == x * 2 / 4)
+                {
+                    a = (x / 4) - 1;
+                    b = 0;
+                }
+                rayDirection = aimObject.transform.up * -a + aimObject.transform.right * -b;
+            }
+            else {
+                if (i == x * 3 / 4)
+                {
+                    a = (x / 4) - 1;
+                    b = 0;
+                }
+                rayDirection = aimObject.transform.up * a + aimObject.transform.right * -b;
+            }
 
-			a--;
+            a--;
 			b++;
 			
 			RaycastHit2D[] ray;
 
             //Determina o "cone" válido de procura do inimigo
-			if (a>=x/14 && (i<x/8 || i>= 3 * x / 4)) {
+			if (a>=x/searchRange && (i<x/4 || i>= 3 * x / 4)) {
 				Debug.DrawRay(rayOrigin, rayDirection, Color.blue);
 				ray = Physics2D.RaycastAll(rayOrigin, rayDirection, atackRange);
+
                 //Pega todos os objetos encontrados no Raycast
-                    //Procura até ver uma parede ou o jogador
-                
+                    //Procura até ver uma parede ou o jogador                
                 for(int j = 0; j < ray.Length; j++)
                 {
                     if (ray[j].transform != null)
                     {
                         if(ray[j].transform.gameObject.tag == "Player")
                         {
-                            return true;
+                            playerFound = true;
                         }
                         if(ray[j].transform.gameObject.tag == "Wall")
                         {
@@ -137,15 +145,9 @@ public class BasicRangedEnemyScript : EnemyController {
                 }
             }
         }
+               
 
-		return false;
+		return playerFound;
 
 	}
-
-	/*public IEnumerator RangedAtack() {
-		Instantiate(projectile, aimObject.transform.position, aimObject.transform.rotation);
-		yield return new WaitForSeconds(1 / atkSpeed);
-		StartCoroutine(currentAtackRoutine);
-	}*/
-
 }
