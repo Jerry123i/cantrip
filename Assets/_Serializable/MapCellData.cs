@@ -13,7 +13,7 @@ public enum Tile {
 }
 public enum Limite {PAREDE, PORTA, CONEXAO}
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 public struct EnemySpawnerInMap {
 	EnemySpawnerData es;
 =======
@@ -21,7 +21,7 @@ public struct EnemySpawnerData {
 	//EnemySpawner es;
 >>>>>>> 2c4d17894ede69d05f8e6e710f20e760e7becf70
 	int x, y;
-}
+}*/
 
 [CreateAssetMenu(fileName ="NewCell", menuName ="Map Cell", order =1)]
 public class MapCellData : ScriptableObject {
