@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Refazer isso com flags dps
+public enum ValidTargets {ENEMY, PLAYER}
+
 public class SpellBehaviourShot : MonoBehaviour {
+
+    public ValidTargets targets;
 
     public SpellSatistics stats;
 
@@ -44,66 +49,83 @@ public class SpellBehaviourShot : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 
-        if(cool.GetComponent<EnemyController>() != null)
+        if(cool.GetComponent<EnemyController>() != null && targets==ValidTargets.ENEMY)
         {
-            EnemyController hit;
-            hit = cool.GetComponent<EnemyController>();
-
-            //Rever a ordem de operação dos efeitos de armadura
-            if (hit.currentArmor > 0)
-            {
-                hit.LoseArmor(1 + stats.extraArmorDamage);
-                hit.TakeDamage(stats.damage * stats.armorPierce);
-                stats.player.hp += stats.damage * stats.armorPierce * stats.lifeSteal;
-            }
-            else
-            {
-                hit.TakeDamage(stats.damage);
-                stats.player.hp += stats.damage * stats.lifeSteal;
-            }
-
-            //Slow
-            if (stats.slowDuration>0 && stats.slowPower > 0)
-            {
-                if (hit.currentEffects.slow > 0)
-                {
-                    hit.CallStopSlow();
-                }
-                hit.currentEffects.slow = stats.slowPower;
-                hit.PullSlow(stats.slowDuration);
-            }
-
-            //Poison
-            if(stats.poisonDuration>0 && stats.poisonPower > 0)
-            {
-                if(hit.currentEffects.poison > 0)
-                {
-					hit.CallStopPoison();
-                }
-                hit.currentEffects.poison = stats.poisonPower;
-				hit.PullPoison(stats.poisonDuration);
-            }
-
-            //Snare
-            if (stats.snareDuration>0)
-            {
-                if (hit.debuffSnare)
-                {
-					hit.CallStopSnare();
-                }
-				hit.PullSnare(stats.snareDuration);
-            }
-
-            if (trample <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                trample--;
-            }
-
+            HitEnemy(cool);
         }
+        if (cool.GetComponent<PlayerBehaviour>() != null && targets==ValidTargets.PLAYER)
+        {
+            HitPlayer(cool);
+        }
+    }
+
+    void HitEnemy(Collider2D cool)
+    {
+        EnemyController hit;
+        hit = cool.GetComponent<EnemyController>();
+
+        //Rever a ordem de operação dos efeitos de armadura
+        if (hit.currentArmor > 0)
+        {
+            hit.LoseArmor(1 + stats.extraArmorDamage);
+            hit.TakeDamage(stats.damage * stats.armorPierce);
+            stats.player.hp += stats.damage * stats.armorPierce * stats.lifeSteal;
+        }
+        else
+        {
+            hit.TakeDamage(stats.damage);
+            stats.player.hp += stats.damage * stats.lifeSteal;
+        }
+
+        //Slow
+        if (stats.slowDuration > 0 && stats.slowPower > 0)
+        {
+            if (hit.currentEffects.slow > 0)
+            {
+                hit.CallStopSlow();
+            }
+            hit.currentEffects.slow = stats.slowPower;
+            hit.PullSlow(stats.slowDuration);
+        }
+
+        //Poison
+        if (stats.poisonDuration > 0 && stats.poisonPower > 0)
+        {
+            if (hit.currentEffects.poison > 0)
+            {
+                hit.CallStopPoison();
+            }
+            hit.currentEffects.poison = stats.poisonPower;
+            hit.PullPoison(stats.poisonDuration);
+        }
+
+        //Snare
+        if (stats.snareDuration > 0)
+        {
+            if (hit.debuffSnare)
+            {
+                hit.CallStopSnare();
+            }
+            hit.PullSnare(stats.snareDuration);
+        }
+
+        if (trample <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            trample--;
+        }
+    }
+
+    void HitPlayer(Collider2D cool)
+    {
+        PlayerBehaviour hit;
+        hit = cool.GetComponent<PlayerBehaviour>();
+
+        hit.hp -= stats.damage;
+        GameObject.Destroy(this.gameObject);
     }
 	
 }
