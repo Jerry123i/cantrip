@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58706443836708650}
   - component: {fileID: 114536648680952858}
   - component: {fileID: 114011709000304802}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BasicWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

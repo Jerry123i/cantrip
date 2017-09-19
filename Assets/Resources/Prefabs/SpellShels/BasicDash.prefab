@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114465704084351634}
   - component: {fileID: 212553126191471114}
   - component: {fileID: 61981350293171276}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BasicDash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,8 +97,8 @@ MonoBehaviour:
   slowDuration: 0
   slowPower: 0
   snareDuration: 0
-  poisonDuration: 10
-  poisonPower: 200
+  poisonDuration: 4
+  poisonPower: 1
   critMultiplier: 0
   critChance: 0
   lifeSteal: 0

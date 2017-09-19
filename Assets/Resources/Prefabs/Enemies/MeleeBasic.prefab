@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114989931120150576}
   - component: {fileID: 114316593546197336}
   m_Layer: 8
-  m_Name: Sandbag2
+  m_Name: MeleeBasic
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,7 +265,6 @@ MonoBehaviour:
   maxHP: 100
   initialArmor: 5
   initialSpeed: 3
-  debugDamage: 10
   player: {fileID: 0}
 --- !u!114 &114664545242122176
 MonoBehaviour:

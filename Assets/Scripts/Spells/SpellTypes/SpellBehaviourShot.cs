@@ -51,7 +51,7 @@ public class SpellBehaviourShot : MonoBehaviour {
 
         if(cool.GetComponent<EnemyController>() != null && targets==ValidTargets.ENEMY)
         {
-            HitEnemy(cool);
+            HitEnemy(cool);			
         }
         if (cool.GetComponent<PlayerBehaviour>() != null && targets==ValidTargets.PLAYER)
         {

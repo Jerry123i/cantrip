@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114159458215788980}
   - component: {fileID: 114727210304011866}
   - component: {fileID: 50978160361230526}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BasicShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,15 +102,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   type: 0
-  slowDuration: 0
-  slowPower: 0
-  snareDuration: 3
-  poisonDuration: 0
-  poisonPower: 0
+  slowDuration: 1.5
+  slowPower: 0.7
+  snareDuration: 0
+  poisonDuration: 3
+  poisonPower: 1000000
   critMultiplier: 0
   critChance: 0
   lifeSteal: 0
-  damage: 1
+  damage: 5
   extraArmorDamage: 0
   armorPierce: 0
   trample: 0

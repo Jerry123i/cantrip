@@ -171,7 +171,6 @@ public class PlayerBehaviour : MonoBehaviour {
             
             for (int i = 0; i < spell.number; i++)
             {
-                Debug.Log("Z:" + targetTransform.rotation.eulerAngles.z);
                 Instantiate(spellPrefab[spellSelector], targetTransform.position, Quaternion.Euler(0,0, angle + (shotSpreadAngle*i)));
             }
         }

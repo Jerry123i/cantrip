@@ -8,6 +8,8 @@ public class EnemyScriptTurret : BasicRangedEnemyScript {
 
     public override void Update()
     {
+		EnemyHealthCare();
+
         if (SearchPlayerWide())
         {
             isShooting = true;

@@ -6,7 +6,9 @@ using Pathfinding;
 
 public class EnemyController : MonoBehaviour {
 
+	[HideInInspector]
     public CurrentEffects currentEffects;
+	[HideInInspector]
 	public AIPath aiControler;
 
     public Image hpBar;
@@ -16,12 +18,11 @@ public class EnemyController : MonoBehaviour {
     public IEnumerator currentPoisonRoutine;
     public IEnumerator currentSnareRoutine;
 
-    public bool debuffSlow;
-    public bool debuffPoison;
-    public bool debuffSnare;
+	[HideInInspector]
+	public bool debuffSlow, debuffPoison, debuffSnare;
 
-    public bool onSnareCD;
-    public bool onArmorCD;
+	[HideInInspector]
+	public bool onSnareCD, onArmorCD;
     
 	[HideInInspector]
     public int currentArmor;
@@ -33,17 +34,17 @@ public class EnemyController : MonoBehaviour {
     public float maxHP;
     public int initialArmor;
     public float initialSpeed;
-
-    public float debugDamage;
+	
     float armorInterval = 0.75f;
     float snareInterval = 5.0f;
 
-    
-    public GameObject player;
+	[HideInInspector]
+	public GameObject player;
 	private Rigidbody2D rb;
 
      virtual public void Start () {
 		aiControler = this.gameObject.GetComponent<AIPath>();
+		currentEffects = this.gameObject.GetComponent<CurrentEffects>();
         player = GameObject.FindGameObjectWithTag("Player");
 		aiControler.target = player.transform;
         currentHp = maxHP;
@@ -60,29 +61,8 @@ public class EnemyController : MonoBehaviour {
 	
 	virtual public void Update () {
 
-		aiControler.speed = currentSpeed;
-
-        if (initialArmor > 0)
-        {
-            armorBar.fillAmount = (float)currentArmor/initialArmor;
-        }
-        hpBar.fillAmount = currentHp / maxHP;
-
-        if (!debuffSnare)
-        {
-            //Move();
-        }
-
-
-        if (debuffPoison)
-        {
-            currentHp -= currentEffects.poison * Time.deltaTime;
-        }
-
-        if (currentHp <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+		aiControler.speed = currentSpeed;		
+		EnemyHealthCare();
 
 	}
 
@@ -112,11 +92,37 @@ public class EnemyController : MonoBehaviour {
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<PlayerBehaviour>().TakeDamage(debugDamage);
+          //  collision.GetComponent<PlayerBehaviour>().TakeDamage(debugDamage);
         }
     }
 
-    public IEnumerator RoutineSlow(float slowDuration)
+	virtual public void EnemyHealthCare() {
+
+		//Mantem HP Armor Morte e Poison
+
+		if (initialArmor > 0) {
+			armorBar.fillAmount = (float)currentArmor / initialArmor;
+		}
+
+		hpBar.fillAmount = currentHp / maxHP;
+
+		if (debuffPoison) {
+			currentHp -= currentEffects.poison * Time.deltaTime;
+		}
+
+		if (currentHp > maxHP) {
+			currentHp = maxHP;
+		}
+
+		if (currentHp <= 0) {
+			Destroy(this.gameObject);
+		}
+
+
+
+	}
+
+	public IEnumerator RoutineSlow(float slowDuration)
     {
         debuffSlow = true;
         currentSpeed = initialSpeed * currentEffects.slow;

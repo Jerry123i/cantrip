@@ -8,10 +8,12 @@ public class BasicRangedEnemyScript : EnemyController {
 	public GameObject projectile;
 	public float atkSpeed;
 	public GameObject aimObject;
-	public bool isShooting;
-    public int searchRange=14;
 
-    public float clock;
+	[HideInInspector]
+	public bool isShooting;
+	int searchRange=14;
+	[HideInInspector]
+	public float clock;
 
 	public override void Start() {
 		base.Start();
@@ -48,7 +50,7 @@ public class BasicRangedEnemyScript : EnemyController {
 
 	}
 
-    public void Shot()
+    virtual public void Shot()
     {
         Instantiate(projectile, aimObject.transform.position, this.transform.rotation);
         clock = 0.0f;
