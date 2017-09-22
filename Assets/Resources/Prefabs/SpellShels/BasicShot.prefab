@@ -102,11 +102,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   type: 0
-  slowDuration: 1.5
-  slowPower: 0.7
+  slowDuration: 3
+  slowPower: 0.5
   snareDuration: 0
-  poisonDuration: 3
-  poisonPower: 1000000
+  poisonDuration: 0
+  poisonPower: 0
   critMultiplier: 0
   critChance: 0
   lifeSteal: 0

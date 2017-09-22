@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour {
     public int currentArmor;
 	[HideInInspector]
 	public float currentSpeed;
-	[HideInInspector]
+	//[HideInInspector]
 	public float currentHp;
 
     public float maxHP;
