@@ -25,7 +25,7 @@ public enum EnemyTag {
 [CreateAssetMenu(fileName = "EnemyTag", menuName = "Enemy Tag", order = 2)]
 public class EnemyInfoData : ScriptableObject {
 
-	public string name;
+	public string enemyName;
 
 	[EnumFlags]
     public EnemyGroup groups;

@@ -11,7 +11,7 @@ public class BasicRangedEnemyScript : EnemyController {
 
 	[HideInInspector]
 	public bool isShooting;
-	int searchRange=14;
+	public int searchRange=14;
 	[HideInInspector]
 	public float clock;
 

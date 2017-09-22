@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum State {RANGED, MELEE}
+enum ElementalBehaviour {RANGED, MELEE}
 
 public class EnemyScriptElemental : BasicRangedEnemyScript {
 
-	State behaviour;
+	ElementalBehaviour behaviour;
 	float speedMultiplier = 2.1f;
 
 	public override void Update() {
 
 		EnemyHealthCare();
 
-		if (behaviour == State.RANGED)
+		if (behaviour == ElementalBehaviour.RANGED)
 		{
 			base.Update();
 		}		
@@ -22,9 +22,9 @@ public class EnemyScriptElemental : BasicRangedEnemyScript {
 			aiControler.speed = currentSpeed;
 		}
 
-		if ((currentHp <= (maxHP / 2)) && behaviour == State.RANGED)
+		if ((currentHp <= (maxHP / 2)) && behaviour == ElementalBehaviour.RANGED)
 		{
-			behaviour = State.MELEE;
+			behaviour = ElementalBehaviour.MELEE;
 			initialSpeed = initialSpeed * speedMultiplier;
 			currentSpeed = currentSpeed * speedMultiplier;
 			aiControler.canMove = true;
