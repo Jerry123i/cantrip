@@ -78,7 +78,7 @@ public class SpellBehaviourTrap : MonoBehaviour {
             hit = coll.GetComponent<EnemyController>();
 
             //Verificar timing de armadura e efeitos de dano over time
-            if (hit.currentArmor > 0)
+            if (hit.CurrentArmor > 0)
             {
                 if (stats.armorPierce > 0)
                 {

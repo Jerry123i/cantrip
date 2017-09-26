@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum States {SEEKING, HEALING, WANDERING }
 
 public class EnemyScriptPixie : EnemyController {
 
-	States behaviour;
-	float healingDistance = 0.42f;
+    protected enum States { SEEKING, HEALING, WANDERING, ATACKING }
+
+    protected States behaviour;
+	protected float healingDistance = 0.42f;
 	public float healingPower;
-	float healingCooldown=1.1f;
-	float clock = 0.0f;
+	protected float healingCooldown=1.1f;
+    protected float clock = 0.0f;
 	GameObject wanderPoint;
 
 	// Use this for initialization
@@ -23,7 +24,12 @@ public class EnemyScriptPixie : EnemyController {
 
 		EnemyHealthCare();
 
-		if (aiControler.target == null || behaviour == States.WANDERING) {
+        if(behaviour == States.ATACKING)
+        {
+            aiControler.speed = currentSpeed;
+        }
+
+        if (aiControler.target == null || behaviour == States.WANDERING) {
 
 			if (!debuffSnare) {
 				Wander();
@@ -50,8 +56,6 @@ public class EnemyScriptPixie : EnemyController {
 				behaviour = States.HEALING;
 				aiControler.speed = 0.0f;
 			}
-					
-
 		}
 
 		if (behaviour == States.HEALING) {
@@ -68,7 +72,7 @@ public class EnemyScriptPixie : EnemyController {
 		}
 	}
 
-	Transform PickNewTarget() {
+	virtual public Transform PickNewTarget() {
 
 		GameObject newTarget;
 		GameObject[] allEnemies;
@@ -99,7 +103,7 @@ public class EnemyScriptPixie : EnemyController {
 
 	}
 
-	void Healing() {
+	public virtual void Healing() {
 
 		clock += Time.deltaTime;
 

@@ -42,7 +42,7 @@ public class SpellBehaviourWave : MonoBehaviour {
             hit = cool.GetComponent<EnemyController>();
 
             //Rever a ordem de operação dos efeitos de armadura
-            if (hit.currentArmor > 0)
+            if (hit.CurrentArmor > 0)
             {
                 hit.LoseArmor(1 + stats.extraArmorDamage);
                 hit.TakeDamage(stats.damage * stats.armorPierce);

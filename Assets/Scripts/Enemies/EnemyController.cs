@@ -23,12 +23,28 @@ public class EnemyController : MonoBehaviour {
 
 	[HideInInspector]
 	public bool onSnareCD, onArmorCD;
-    
-	[HideInInspector]
-    public int currentArmor;
+
+    [HideInInspector]
+    private int currentArmor;
+    public int CurrentArmor
+    {
+        get { return currentArmor; }
+        set
+        {
+            currentArmor = value;
+            if (currentArmor > 0)
+            {
+                armorBar.gameObject.SetActive(true);
+            }
+            else
+            {
+                armorBar.gameObject.SetActive(false);
+            }
+        }
+    }
 	[HideInInspector]
 	public float currentSpeed;
-	//[HideInInspector]
+	[HideInInspector]
 	public float currentHp;
 
     public float maxHP;
@@ -48,7 +64,7 @@ public class EnemyController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
 		aiControler.target = player.transform;
         currentHp = maxHP;
-        currentArmor = initialArmor;
+        CurrentArmor = initialArmor;
         currentSpeed = initialSpeed;
 		rb = GetComponent<Rigidbody2D>();
 
@@ -85,7 +101,7 @@ public class EnemyController : MonoBehaviour {
 
     public void LoseArmor(int lostArmor)
     {
-        currentArmor -= lostArmor;
+        CurrentArmor -= lostArmor;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -101,7 +117,7 @@ public class EnemyController : MonoBehaviour {
 		//Mantem HP Armor Morte e Poison
 
 		if (initialArmor > 0) {
-			armorBar.fillAmount = (float)currentArmor / initialArmor;
+			armorBar.fillAmount = (float)CurrentArmor / initialArmor;
 		}
 
 		hpBar.fillAmount = currentHp / maxHP;

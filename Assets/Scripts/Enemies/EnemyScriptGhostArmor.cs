@@ -7,7 +7,7 @@ public class EnemyScriptGhostArmor : EnemyController {
 	public override void EnemyHealthCare() {
 
 		if (initialArmor > 0) {
-			armorBar.fillAmount = (float)currentArmor / initialArmor;
+			armorBar.fillAmount = (float)CurrentArmor / initialArmor;
 		}
 
 		hpBar.fillAmount = currentHp / maxHP;
@@ -20,7 +20,7 @@ public class EnemyScriptGhostArmor : EnemyController {
 			currentHp = maxHP;
 		}
 
-		if (currentArmor <= 0) {
+		if (CurrentArmor <= 0) {
 			Destroy(this.gameObject);
 		}
 

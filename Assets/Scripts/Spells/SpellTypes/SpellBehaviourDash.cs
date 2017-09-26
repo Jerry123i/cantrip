@@ -38,7 +38,7 @@ public class SpellBehaviourDash : MonoBehaviour {
             EnemyController hit;
             hit = cool.GetComponent<EnemyController>();
 
-            if (hit.currentArmor > 0)
+            if (hit.CurrentArmor > 0)
             {
                 hit.LoseArmor(1 + stats.extraArmorDamage);
                 hit.TakeDamage(stats.damage * stats.armorPierce);

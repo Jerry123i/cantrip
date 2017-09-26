@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum ElementalBehaviour {RANGED, MELEE}
-
 public class EnemyScriptElemental : BasicRangedEnemyScript {
 
-	ElementalBehaviour behaviour;
+    enum ElementalBehaviour { RANGED, MELEE }
+
+
+    ElementalBehaviour behaviour;
 	float speedMultiplier = 2.1f;
 
 	public override void Update() {

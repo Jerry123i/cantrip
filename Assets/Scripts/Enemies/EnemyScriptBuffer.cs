@@ -14,11 +14,11 @@ public class EnemyScriptBuffer : EnemyController {
 	public override void Update() {
 		base.Update();
 
-		if (currentArmor <= 0 && behaviour == BufferBehaviour.NORMAL) {
+		if (CurrentArmor <= 0 && behaviour == BufferBehaviour.NORMAL) {
 			ChangeBehaviourToDying();
 		}
 
-		if (currentArmor>0 && behaviour == BufferBehaviour.DYING) {
+		if (CurrentArmor>0 && behaviour == BufferBehaviour.DYING) {
 			ChangeBehaviourToNormal();
 		}
 

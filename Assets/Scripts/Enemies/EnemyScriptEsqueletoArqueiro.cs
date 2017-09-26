@@ -11,7 +11,7 @@ public class EnemyScriptEsqueletoArqueiro : BasicRangedEnemyScript {
 	public override void Update() {
 		base.Update();
 
-		if (currentArmor == 0 && armorDown == false) {
+		if (CurrentArmor == 0 && armorDown == false) {
 			armorDown = true;
 			currentSpeed *= speedBurstMultiplier;
 			initialSpeed *= speedBurstMultiplier;
