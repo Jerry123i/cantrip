@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SpellType { Shot, Laser, Cone, Bomb, Wave, Teleport, Dash, Mine, Trap };
+
+
 public class SpellSatistics : MonoBehaviour {
 
     public PlayerBehaviour player;
 
-    public enum SpellType {Shot, Laser, Cone, Bomb, Wave, Teleport, Dash, Mine, Trap};
 
     public SpellType type;
 
@@ -30,8 +32,12 @@ public class SpellSatistics : MonoBehaviour {
 
     public int trample;
 
+    public int manaCost;
+
     public float area; //tornar global e multiplicar no behaviour específico
     public int number;
+
+    public float duration;
 
     void Start()
     {

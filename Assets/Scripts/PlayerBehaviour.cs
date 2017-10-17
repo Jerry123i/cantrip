@@ -7,21 +7,30 @@ using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour {
 
     public GameObject[] spellPrefab;
+    [HideInInspector]
     public Transform targetTransform;
-    public Text texto;
 
+    [HideInInspector]
     public int spellSelector;
 
     public float movSpeed;
     public float maxHP;
-    public float debugDamage;
+
+    public int maxMana;
+    public int currentMana;
 
 	public float shotSpreadAngle;
 
+    [HideInInspector]
     public float angle;
 
     public float hp;
     private bool isDead;
+
+    float dmgCooldownClock;
+    [HideInInspector]
+    public bool onDmgCooldown;
+    public float dmgCooldown;
 
 	void Start () {
         hp = maxHP;
@@ -31,6 +40,16 @@ public class PlayerBehaviour : MonoBehaviour {
 	void Update () {
         Move();
         Rotate();
+
+        if (isDead)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+        }
+
+        if (onDmgCooldown)
+        {
+            DmgCooldownUpdate();
+        }
         
         if (Input.GetMouseButtonDown(0))
         {
@@ -67,31 +86,31 @@ public class PlayerBehaviour : MonoBehaviour {
         {
             
     
-            case SpellSatistics.SpellType.Bomb:
+            case SpellType.Bomb:
                 Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
                 break;
 
-            case SpellSatistics.SpellType.Wave:
+            case SpellType.Wave:
                 Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
                 break;
 
-            case SpellSatistics.SpellType.Shot:
+            case SpellType.Shot:
                 Shot();
                 break;
 
-            case SpellSatistics.SpellType.Trap:
+            case SpellType.Trap:
                 Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
                 break;
 
-            case SpellSatistics.SpellType.Laser:
+            case SpellType.Laser:
                 Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation, targetTransform);
                 break;
 
-            case SpellSatistics.SpellType.Dash:
+            case SpellType.Dash:
                 Dash();
                 break;
 
-            case SpellSatistics.SpellType.Teleport:
+            case SpellType.Teleport:
                 Teleport();
                 break;
 
@@ -112,10 +131,22 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void TakeDamage (float damageTaken)
     {
-        if (!isDead)
+        if (!onDmgCooldown)
         {
             hp -= damageTaken;
             if (hp <= 0) isDead = true;
+            onDmgCooldown = true;
+            dmgCooldownClock = 0.0f;
+        }
+    }
+
+    void DmgCooldownUpdate()
+    {
+        dmgCooldownClock += Time.deltaTime;
+        if (dmgCooldownClock >= dmgCooldown)
+        {
+            dmgCooldownClock = 0.0f;
+            onDmgCooldown = false;
         }
     }
 

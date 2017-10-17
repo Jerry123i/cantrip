@@ -8,11 +8,17 @@ public class EnemyController : MonoBehaviour {
 
 	[HideInInspector]
     public CurrentEffects currentEffects;
-	[HideInInspector]
+	//[HideInInspector]
 	public AIPath aiControler;
 
     public Image hpBar;
     public Image armorBar;
+
+    public MeleeHitBoxScript atackHitBox;
+    public float atackCooldown;
+    public bool onAtackCooldown;
+    public float meleeDmg;
+
 
     public IEnumerator currentSlowRoutine;
     public IEnumerator currentPoisonRoutine;
@@ -67,6 +73,7 @@ public class EnemyController : MonoBehaviour {
         CurrentArmor = initialArmor;
         currentSpeed = initialSpeed;
 		rb = GetComponent<Rigidbody2D>();
+        atackHitBox = GetComponentInChildren<MeleeHitBoxScript>();
 
         if(initialArmor == 0)
         {
@@ -76,8 +83,9 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	virtual public void Update () {
-
-		aiControler.speed = currentSpeed;		
+        
+		aiControler.speed = currentSpeed;
+        MlAtack();
 		EnemyHealthCare();
 
 	}
@@ -103,14 +111,7 @@ public class EnemyController : MonoBehaviour {
     {
         CurrentArmor -= lostArmor;
     }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-          //  collision.GetComponent<PlayerBehaviour>().TakeDamage(debugDamage);
-        }
-    }
+        
 
 	virtual public void EnemyHealthCare() {
 
@@ -137,6 +138,22 @@ public class EnemyController : MonoBehaviour {
 
 
 	}
+
+    virtual public void MlAtack()
+    {
+        if (atackHitBox.player != null && !onAtackCooldown)
+        {
+            StartCoroutine(MeleeAtack());
+        }
+    }
+
+    public IEnumerator MeleeAtack()
+    {
+        atackHitBox.player.TakeDamage(meleeDmg);
+        onAtackCooldown = true;
+        yield return new WaitForSeconds(atackCooldown);
+        onAtackCooldown = false;
+    }
 
 	public IEnumerator RoutineSlow(float slowDuration)
     {

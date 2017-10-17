@@ -32,13 +32,17 @@ public class EnemyScriptGoblin : BasicRangedEnemyScript {
 
     public override void Shot()
     {
-		base.Shot();
-		multAtackCounter++;
-		if (multAtackCounter <= multAtack - 1) {			
-			clock = (1 / atkSpeed) / multAtacksInterval;
-		} else {
-			multAtackCounter = 0;
-		}
+        base.Shot();
+        multAtackCounter++;
+        if (multAtackCounter <= multAtack - 1)
+        {
+            clock = (1 / atkSpeed) / multAtacksInterval;
+        }
+        else
+        {
+            multAtackCounter = 0;
+        }
+    }
 
     public override void RotateToPlayer()
     {        

@@ -152,4 +152,10 @@ public class BasicRangedEnemyScript : EnemyController {
 		return playerFound;
 
 	}
+
+    public override void MlAtack()
+    {
+        //Feijoada.exe
+    }
+
 }

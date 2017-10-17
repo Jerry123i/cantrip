@@ -8,12 +8,11 @@ public class SpellBehaviourTrap : MonoBehaviour {
 
     bool isCritMode;
     float clock=0.0f;
-    public float maxDuration;
 
     void Update()
     {
         clock += Time.deltaTime;
-        if(clock>= maxDuration)
+        if(clock>= stats.duration)
         {
             Destroy(this.gameObject);
         }    
