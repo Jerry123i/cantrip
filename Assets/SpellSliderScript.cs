@@ -10,7 +10,16 @@ public class SpellSliderScript : MonoBehaviour {
     public Text valueText;
 
 	// Update is called once per frame
-	void Update () {
+	void Update () {        
+
+        if(slider.IsInteractable() == false)
+        {
+            valueText.text = "";
+        }
+        else
+        {
+            valueText.text = System.String.Format("{0:F2}", slider.value);
+        }
 
 	}
 }

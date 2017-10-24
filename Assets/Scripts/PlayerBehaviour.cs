@@ -35,6 +35,18 @@ public class PlayerBehaviour : MonoBehaviour {
 	void Start () {
         hp = maxHP;
         isDead = false;
+
+        if (GameObject.Find("SpellHolder") !=null)
+        {
+            HolderObjectScript sh = GameObject.Find("SpellHolder").GetComponent<HolderObjectScript>();
+
+            spellPrefab[0] = sh.spellData[0].spellShell;
+            spellPrefab[1] = sh.spellData[1].spellShell;
+
+            spellPrefab[0].GetComponent<SpellBehaviourShot>().stats = sh.spellData[0].spellStatistics;
+            spellPrefab[1].GetComponent<SpellBehaviourShot>().stats = sh.spellData[1].spellStatistics;
+        }
+
 	}
 	
 	void Update () {
@@ -83,9 +95,7 @@ public class PlayerBehaviour : MonoBehaviour {
         spell = spellPrefab[spellSelector].GetComponent<SpellSatistics>();
 
         switch (spell.type)
-        {
-            
-    
+        {           
             case SpellType.Bomb:
                 Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
                 break;
@@ -193,6 +203,11 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         SpellSatistics spell;
         spell = spellPrefab[spellSelector].GetComponent<SpellSatistics>();
+
+        if(spell == null)
+        {
+            Debug.Log("Spell is null");
+        }
 
         float angle;
 

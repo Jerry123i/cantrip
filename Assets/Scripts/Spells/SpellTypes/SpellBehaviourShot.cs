@@ -19,7 +19,7 @@ public class SpellBehaviourShot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+                
         trample = stats.trample;
 
         if (stats.rollCrit())

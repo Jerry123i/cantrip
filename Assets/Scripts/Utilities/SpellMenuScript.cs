@@ -18,10 +18,12 @@ public class SpellMenuScript : MonoBehaviour {
     public GameObject basicTrap;
     public GameObject basicWave;
 
+    public GameObject spellHolder;
+
     // Use this for initialization
     void Start () {
 
-        spell = new SpellSatistics();
+        spell = gameObject.AddComponent(typeof(SpellSatistics)) as SpellSatistics;
 
         SetDropdown();
 
@@ -52,7 +54,7 @@ public class SpellMenuScript : MonoBehaviour {
         ConditionalSliders(sliders[6], (sliders[5].slider.value > sliders[5].slider.minValue));
         ConditionalSliders(sliders[12], (typeDropdown.value == (int)SpellType.Trap));
         ConditionalSliders(sliders[14], (typeDropdown.value == (int)SpellType.Shot));
-        ConditionalSliders(sliders[13], (typeDropdown.value == (int)SpellType.Wave) || (typeDropdown.value == (int)SpellType.Bomb));
+        ConditionalSliders(sliders[13], (typeDropdown.value == (int)SpellType.Wave) || (typeDropdown.value == (int)SpellType.Bomb) || (typeDropdown.value == (int)SpellType.Laser));
 
         spell.type = (SpellType)typeDropdown.value;
 
@@ -73,18 +75,14 @@ public class SpellMenuScript : MonoBehaviour {
         spell.number           = (int)sliders[14].slider.value;
         spell.damage           = sliders[15].slider.value;
 
-
+       
 
     }
 
     void ConditionalSliders(SpellSliderScript spellSliderScript, bool condicao)
-    {
-        if(spellSliderScript.gameObject.active != condicao)
-        {
-            spellSliderScript.gameObject.SetActive(condicao);
-            grid.startAxis = GridLayoutGroup.Axis.Vertical;
-        }
-    }
+    {       
+        spellSliderScript.slider.interactable = condicao;   
+    }    
 
     void SetDropdown()
     {
@@ -95,7 +93,6 @@ public class SpellMenuScript : MonoBehaviour {
 
             if(typeDropdown.options.Count >= 20)
             {
-                Debug.Log("20");
                 Debug.Break();
             }
 
@@ -121,10 +118,11 @@ public class SpellMenuScript : MonoBehaviour {
         slider.slider.wholeNumbers = isWholeNumbers;
     }
 
-    public GameObject BuildSpell()
+    public void BuildSpell()
     {
         GameObject completeSpell;
-
+        SpellData newData;
+                
         switch (spell.type)
         {
             case SpellType.Bomb:
@@ -167,7 +165,11 @@ public class SpellMenuScript : MonoBehaviour {
                 break;
         }
 
-        return completeSpell;
+        newData = new SpellData();
+        newData.spellShell = completeSpell;
+        newData.spellStatistics = spell;
+
+        spellHolder.GetComponent<HolderObjectScript>().spellData.Add(newData);
 
     }
 

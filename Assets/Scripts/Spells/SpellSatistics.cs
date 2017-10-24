@@ -41,7 +41,10 @@ public class SpellSatistics : MonoBehaviour {
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
+        }
     }
 
     public bool rollCrit()
@@ -59,5 +62,7 @@ public class SpellSatistics : MonoBehaviour {
         }
 
     }
+
+
 
 }
