@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd3b0fc7b880ef4ba283953009a4db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 114465704084351634}
+  stats: {fileID: 0}
   maxDuration: 0.2
 --- !u!114 &114465704084351634
 MonoBehaviour:
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1035040236663082}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9928a2c2bd3427479eb186ba682686c, type: 3}
   m_Name: 
@@ -106,8 +106,10 @@ MonoBehaviour:
   extraArmorDamage: 0
   armorPierce: 1
   trample: 0
+  manaCost: 0
   area: 4
   number: 0
+  duration: 0
 --- !u!212 &212553126191471114
 SpriteRenderer:
   m_ObjectHideFlags: 1

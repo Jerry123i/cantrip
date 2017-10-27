@@ -95,7 +95,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1848971149373246}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9928a2c2bd3427479eb186ba682686c, type: 3}
   m_Name: 
@@ -114,8 +114,10 @@ MonoBehaviour:
   extraArmorDamage: 0
   armorPierce: 0
   trample: 0
+  manaCost: 0
   area: 0
   number: 1
+  duration: 0
 --- !u!114 &114727210304011866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54611d7e66794e84c86b8b0285afcd7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 0}
   targets: 0
-  stats: {fileID: 114159458215788980}
   projectileSpeed: 15
   trample: 0
   clock: 0

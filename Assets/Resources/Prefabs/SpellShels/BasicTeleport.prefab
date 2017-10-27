@@ -52,7 +52,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1434950802563480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9928a2c2bd3427479eb186ba682686c, type: 3}
   m_Name: 
@@ -71,8 +71,10 @@ MonoBehaviour:
   extraArmorDamage: 0
   armorPierce: 1
   trample: 0
+  manaCost: 0
   area: 10
   number: 0
+  duration: 0
 --- !u!114 &114536648680952858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a134649bcb3f23441bd47849a756403e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 114011709000304802}
+  stats: {fileID: 0}
   aoe: {fileID: 58706443836708650}
   maxRadius: 0
 --- !u!212 &212959638363958078

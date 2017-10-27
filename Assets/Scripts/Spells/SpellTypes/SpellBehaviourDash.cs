@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBehaviourDash : MonoBehaviour {
-
-    public SpellSatistics stats;
-    
+public class SpellBehaviourDash : SpellBehaviourBase {
+        
     float clock = 0.0f;
     public float maxDuration=0.15f;
 
-    void Start()
+    override public void Start()
     {
+        base.Start();
+
         this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x, stats.area, this.gameObject.transform.localScale.z);
 
         if (stats.rollCrit())

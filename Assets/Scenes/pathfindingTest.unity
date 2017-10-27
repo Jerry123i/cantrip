@@ -1561,13 +1561,13 @@ Prefab:
         type: 2}
       propertyPath: spellPrefab.Array.data[0]
       value: 
-      objectReference: {fileID: 1848971149373246, guid: 85a0422a287cbde479fa2158fd3e1d32,
+      objectReference: {fileID: 1035040236663082, guid: 79e81de99ed795d4fb32ceb197cc46a1,
         type: 2}
     - target: {fileID: 114023956216212918, guid: e0bd64366b63305419a4c8976a8360b5,
         type: 2}
       propertyPath: spellPrefab.Array.data[1]
       value: 
-      objectReference: {fileID: 1035040236663082, guid: 79e81de99ed795d4fb32ceb197cc46a1,
+      objectReference: {fileID: 1848971149373246, guid: 85a0422a287cbde479fa2158fd3e1d32,
         type: 2}
     - target: {fileID: 114023956216212918, guid: e0bd64366b63305419a4c8976a8360b5,
         type: 2}
@@ -1593,6 +1593,11 @@ Prefab:
         type: 2}
       propertyPath: currentMana
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023956216212918, guid: e0bd64366b63305419a4c8976a8360b5,
+        type: 2}
+      propertyPath: shotSpreadAngle
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0bd64366b63305419a4c8976a8360b5, type: 2}
@@ -2132,6 +2137,11 @@ Prefab:
         type: 2}
       propertyPath: atackCooldown
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114968765026879050, guid: 8591ed1bc4deb3644a7d2af2ec94a4e0,
+        type: 2}
+      propertyPath: maxHP
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8591ed1bc4deb3644a7d2af2ec94a4e0, type: 2}

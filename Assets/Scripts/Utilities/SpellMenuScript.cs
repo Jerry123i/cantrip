@@ -27,7 +27,7 @@ public class SpellMenuScript : MonoBehaviour {
 
         SetDropdown();
 
-        SetSlider(sliders[0], "Slow Power", 0.0f, 100.0f);
+        SetSlider(sliders[0], "Slow Power", 0.0f, 1.0f);
         SetSlider(sliders[1], "Slow Duration", 1.0f, 5.0f);        
         SetSlider(sliders[2], "Snare Duration", 0.0f, 3.0f);
         SetSlider(sliders[3], "Poison Power", 0.0f, 100f);
@@ -120,44 +120,37 @@ public class SpellMenuScript : MonoBehaviour {
 
     public void BuildSpell()
     {
+        SpellData theData;
         GameObject completeSpell;
-        SpellData newData;
                 
         switch (spell.type)
         {
             case SpellType.Bomb:
                 completeSpell = basicBomb;
-                completeSpell.GetComponent<SpellBehaviourWave>().stats = spell;
                 break;
 
             case SpellType.Dash:
                 completeSpell = basicDash;
-                completeSpell.GetComponent<SpellBehaviourDash>().stats = spell;
                 break;
 
             case SpellType.Laser:
                 completeSpell = basicLaser;
-                completeSpell.GetComponent<SpellBehaviourLaser>().stats = spell;
                 break;
 
             case SpellType.Shot:
                 completeSpell = basicShot;
-                completeSpell.GetComponent<SpellBehaviourShot>().stats = spell;
                 break;
 
             case SpellType.Teleport:
                 completeSpell = basicTeleport;
-                completeSpell.GetComponent<SpellBehaviourWave>().stats = spell;
                 break;
 
             case SpellType.Trap:
                 completeSpell = basicTrap;
-                completeSpell.GetComponent<SpellBehaviourTrap>().stats = spell;
                 break;
 
             case SpellType.Wave:
                 completeSpell = basicWave;
-                completeSpell.GetComponent<SpellBehaviourWave>().stats = spell;
                 break;
 
             default:
@@ -165,12 +158,16 @@ public class SpellMenuScript : MonoBehaviour {
                 break;
         }
 
-        newData = new SpellData();
-        newData.spellShell = completeSpell;
-        newData.spellStatistics = spell;
+        completeSpell.GetComponent<SpellBehaviourBase>().stats = spell;
 
-        spellHolder.GetComponent<HolderObjectScript>().spellData.Add(newData);
+        theData = SpellData.CreateInstance<SpellData>();
+        theData.spellShell = completeSpell;
+        theData.spellStats = spell;
 
+        spellHolder.GetComponent<HolderObjectScript>().spellData.Add(theData);
+
+        Debug.Log("spell eh null?: " + spell);
+        Debug.Log("completeSpell eh null?: " + completeSpell.GetComponent<SpellBehaviourBase>().stats);
     }
 
 }

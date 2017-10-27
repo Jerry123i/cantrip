@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBehaviourWave : MonoBehaviour {
-
-    public SpellSatistics stats;
+public class SpellBehaviourWave : SpellBehaviourBase {
 
     public CircleCollider2D aoe;
 
     private float growthRate;
     public float maxRadius;
-    
 
-	void Start () {
+
+    override public void Start()
+    {
+        base.Start();
+
         maxRadius = stats.area;
         growthRate = 0.1f;
 

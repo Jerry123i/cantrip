@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBehaviourTrap : MonoBehaviour {
-
-    public SpellSatistics stats;
-
+public class SpellBehaviourTrap : SpellBehaviourBase {
+    
     bool isCritMode;
     float clock=0.0f;
 

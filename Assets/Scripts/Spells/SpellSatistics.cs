@@ -39,6 +39,11 @@ public class SpellSatistics : MonoBehaviour {
 
     public float duration;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     void Start()
     {
         if (GameObject.FindGameObjectWithTag("Player") != null)

@@ -5,21 +5,19 @@ using UnityEngine;
 //Refazer isso com flags dps
 public enum ValidTargets {ENEMY, PLAYER}
 
-public class SpellBehaviourShot : MonoBehaviour {
+public class SpellBehaviourShot : SpellBehaviourBase {
 
     public ValidTargets targets;
-
-    public SpellSatistics stats;
-
+    
     public float projectileSpeed;
     
     public int trample;
 
     public float clock;
 
-	// Use this for initialization
-	void Start () {
-                
+    // Use this for initialization
+    override public void Start()
+    {
         trample = stats.trample;
 
         if (stats.rollCrit())

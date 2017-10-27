@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBehaviourLaser : MonoBehaviour {
-
-    public SpellSatistics stats;
+public class SpellBehaviourLaser : SpellBehaviourBase {
+    
     //bool isCritMode;
 
     Transform box;
     
-	// Use this for initialization
-	void Start () {
+	override public void Start () {
+
+        base.Start();
 
         box = this.gameObject.GetComponent<Transform>();
 
@@ -21,7 +21,6 @@ public class SpellBehaviourLaser : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
         //Extensão do raio

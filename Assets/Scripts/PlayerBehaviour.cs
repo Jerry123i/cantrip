@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour {
 
-    public GameObject[] spellPrefab;
+    public List<GameObject> spellPrefab;
+    public List<SpellSatistics> spellStats;
     [HideInInspector]
     public Transform targetTransform;
 
@@ -19,7 +20,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public int maxMana;
     public int currentMana;
 
-	public float shotSpreadAngle;
+	public float shotSpreadAngle = 15;
 
     [HideInInspector]
     public float angle;
@@ -38,13 +39,23 @@ public class PlayerBehaviour : MonoBehaviour {
 
         if (GameObject.Find("SpellHolder") !=null)
         {
-            HolderObjectScript sh = GameObject.Find("SpellHolder").GetComponent<HolderObjectScript>();
+            HolderObjectScript sh;
+            sh = GameObject.Find("SpellHolder").GetComponent<HolderObjectScript>();
 
-            spellPrefab[0] = sh.spellData[0].spellShell;
-            spellPrefab[1] = sh.spellData[1].spellShell;
+            sh.PrintSpellData();
 
-            spellPrefab[0].GetComponent<SpellBehaviourShot>().stats = sh.spellData[0].spellStatistics;
-            spellPrefab[1].GetComponent<SpellBehaviourShot>().stats = sh.spellData[1].spellStatistics;
+            spellPrefab.Clear();
+
+            spellPrefab.Add(sh.spellData[0].spellShell);
+            spellPrefab.Add(sh.spellData[1].spellShell);
+            
+            Debug.Log("spellPrefab[0].GetComponent<SpellBehaviourBase>().stats:"+spellPrefab[0].GetComponent<SpellBehaviourBase>().stats.damage.ToString());
+            Debug.Log("[0]" + spellPrefab[0].GetComponent<SpellBehaviourBase>().stats);
+            Debug.Log("[1]" + spellPrefab[1].GetComponent<SpellBehaviourBase>().stats);
+
+            spellPrefab[0].GetComponent<SpellBehaviourBase>().stats.player = this;
+            spellPrefab[1].GetComponent<SpellBehaviourBase>().stats.player = this;
+
         }
 
 	}
@@ -87,41 +98,50 @@ public class PlayerBehaviour : MonoBehaviour {
     // Funções só pro prótipo com um inimigo
     void MainCast (int a)
     {
+
+        GameObject go;
         Vector3 mouse;
         mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         spellSelector = a;
         SpellSatistics spell;
-        spell = spellPrefab[spellSelector].GetComponent<SpellSatistics>();
+        spell = spellPrefab[spellSelector].GetComponent<SpellBehaviourBase>().stats;
+
+        Debug.Log(spell);
+
 
         switch (spell.type)
         {           
             case SpellType.Bomb:
-                Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
+                go = Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
+                go.GetComponent<SpellBehaviourBase>().stats = spell;
                 break;
 
             case SpellType.Wave:
-                Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
+                go = Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
+                go.GetComponent<SpellBehaviourBase>().stats = spell;
                 break;
 
             case SpellType.Shot:
-                Shot();
+                Shot(spell);
                 break;
 
             case SpellType.Trap:
-                Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
+                go = Instantiate(spellPrefab[spellSelector], new Vector3(mouse.x, mouse.y, 0.0f), Quaternion.Euler(Vector3.zero));
+                go.GetComponent<SpellBehaviourBase>().stats = spell;
                 break;
 
             case SpellType.Laser:
-                Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation, targetTransform);
+                go = Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation, targetTransform);
+                go.GetComponent<SpellBehaviourBase>().stats = spell;
                 break;
 
             case SpellType.Dash:
-                Dash();
+                Dash(spell);
                 break;
 
             case SpellType.Teleport:
-                Teleport();
+                Teleport(spell);
                 break;
 
             default:
@@ -160,24 +180,27 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
-    public void Dash()
+    public void Dash(SpellSatistics spell)
     {
+        GameObject go;
         Vector3 aPoint;
         Vector3 bPoint;
         Vector3 spawnPoint;
 
         aPoint = this.gameObject.transform.position;
-        this.gameObject.transform.Translate(Vector3.up * spellPrefab[spellSelector].GetComponent<SpellSatistics>().area);
+        this.gameObject.transform.Translate(Vector3.up * spellPrefab[spellSelector].GetComponent<SpellBehaviourBase>().stats.area);
         bPoint = this.gameObject.transform.position;
 
         spawnPoint = new Vector3((aPoint.x + bPoint.x) / 2, (aPoint.y + bPoint.y) / 2, 0.0f);
 
-        Instantiate(spellPrefab[spellSelector], spawnPoint, Quaternion.Euler(0, 0, angle - 90.0f));
+        go = Instantiate(spellPrefab[spellSelector], spawnPoint, Quaternion.Euler(0, 0, angle - 90.0f));
+        go.GetComponent<SpellBehaviourBase>().stats = spell;
 
     }
 
-    public void Teleport()
+    public void Teleport(SpellSatistics spell)
     {
+        GameObject go;
         float teleportDistance;
         Vector3 flatMouse;
 
@@ -186,23 +209,25 @@ public class PlayerBehaviour : MonoBehaviour {
         Debug.Log("ScreenToWorld: " + flatMouse);
         Debug.Log("Distancia: " + Vector3.Distance(flatMouse, this.gameObject.GetComponent<Transform>().localPosition));
 
-        if (Vector3.Distance(flatMouse, this.gameObject.GetComponent<Transform>().localPosition) < spellPrefab[spellSelector].GetComponent<SpellSatistics>().area)
+        if (Vector3.Distance(flatMouse, this.gameObject.GetComponent<Transform>().localPosition) < spellPrefab[spellSelector].GetComponent<SpellBehaviourBase>().stats.area)
         {
             teleportDistance = Vector3.Distance(flatMouse, this.gameObject.GetComponent<Transform>().localPosition);
         }
         else
         {
-            teleportDistance = spellPrefab[spellSelector].GetComponent<SpellSatistics>().area;
+            teleportDistance = spellPrefab[spellSelector].GetComponent<SpellBehaviourBase>().stats.area;
         }
 
         this.gameObject.transform.Translate(Vector3.up * teleportDistance);
-        Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
+        go = Instantiate(spellPrefab[spellSelector], this.gameObject.GetComponent<Transform>().position, this.gameObject.GetComponent<Transform>().rotation, this.gameObject.GetComponent<Transform>());
+        go.GetComponent<SpellBehaviourBase>().stats = spell;
     }
 
-    public void Shot()
+    public void Shot(SpellSatistics spell)
     {
-        SpellSatistics spell;
-        spell = spellPrefab[spellSelector].GetComponent<SpellSatistics>();
+        GameObject go;
+
+        Debug.Log(spell.ToString());
 
         if(spell == null)
         {
@@ -217,13 +242,15 @@ public class PlayerBehaviour : MonoBehaviour {
             
             for (int i = 0; i < spell.number; i++)
             {
-                Instantiate(spellPrefab[spellSelector], targetTransform.position, Quaternion.Euler(0,0, angle + (shotSpreadAngle*i)));
+                go = Instantiate(spellPrefab[spellSelector], targetTransform.position, Quaternion.Euler(0,0, angle + (shotSpreadAngle*i)));
+                go.GetComponent<SpellBehaviourBase>().stats = spell;
             }
         }
 
         else
         {
-            Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation);
+            go = Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation);
+            go.GetComponent<SpellBehaviourBase>().stats = spell;
         }
         
     }
