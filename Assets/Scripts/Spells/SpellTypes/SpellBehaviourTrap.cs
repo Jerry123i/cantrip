@@ -75,7 +75,7 @@ public class SpellBehaviourTrap : SpellBehaviourBase {
             hit = coll.GetComponent<EnemyController>();
 
             //Verificar timing de armadura e efeitos de dano over time
-            if (hit.CurrentArmor > 0)
+            if (hit.CurrentArmor > 0 && stats.damage>0)
             {
                 if (stats.armorPierce > 0)
                 {

@@ -16,7 +16,7 @@ public class SpellBehaviourShot : SpellBehaviourBase {
     public float clock;
 
     // Use this for initialization
-    override public void Start()
+    public void Start()
     {
         trample = stats.trample;
 
@@ -63,7 +63,7 @@ public class SpellBehaviourShot : SpellBehaviourBase {
         hit = cool.GetComponent<EnemyController>();
 
         //Rever a ordem de operação dos efeitos de armadura
-        if (hit.CurrentArmor > 0)
+        if (hit.CurrentArmor > 0 && stats.damage>0)
         {
             hit.LoseArmor(1 + stats.extraArmorDamage);
             hit.TakeDamage(stats.damage * stats.armorPierce);

@@ -10,11 +10,15 @@ public class SpellBehaviourWave : SpellBehaviourBase {
     public float maxRadius;
 
 
-    override public void Start()
+    public void Start()
     {
-        base.Start();
+        maxRadius = FixAreaValue(stats.area, 1.5f, 6.75f);
 
-        maxRadius = stats.area;
+        if(stats.type == SpellType.Teleport)
+        {
+            maxRadius /= 2.0f;
+        }
+
         growthRate = 0.1f;
 
         if (stats.rollCrit())
@@ -43,7 +47,7 @@ public class SpellBehaviourWave : SpellBehaviourBase {
             hit = cool.GetComponent<EnemyController>();
 
             //Rever a ordem de operação dos efeitos de armadura
-            if (hit.CurrentArmor > 0)
+            if (hit.CurrentArmor > 0 && stats.damage>0)
             {
                 hit.LoseArmor(1 + stats.extraArmorDamage);
                 hit.TakeDamage(stats.damage * stats.armorPierce);

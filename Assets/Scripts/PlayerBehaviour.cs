@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public List<GameObject> spellPrefab;
     public List<SpellSatistics> spellStats;
+
     [HideInInspector]
     public Transform targetTransform;
 
@@ -19,6 +20,8 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public int maxMana;
     public int currentMana;
+    public float manaRegenRate;
+    public float initialManaRegenRate;
 
 	public float shotSpreadAngle = 15;
 
@@ -49,10 +52,6 @@ public class PlayerBehaviour : MonoBehaviour {
             spellPrefab.Add(sh.spellData[0].spellShell);
             spellPrefab.Add(sh.spellData[1].spellShell);
             
-            Debug.Log("spellPrefab[0].GetComponent<SpellBehaviourBase>().stats:"+spellPrefab[0].GetComponent<SpellBehaviourBase>().stats.damage.ToString());
-            Debug.Log("[0]" + spellPrefab[0].GetComponent<SpellBehaviourBase>().stats);
-            Debug.Log("[1]" + spellPrefab[1].GetComponent<SpellBehaviourBase>().stats);
-
             spellPrefab[0].GetComponent<SpellBehaviourBase>().stats.player = this;
             spellPrefab[1].GetComponent<SpellBehaviourBase>().stats.player = this;
 
@@ -61,8 +60,10 @@ public class PlayerBehaviour : MonoBehaviour {
 	}
 	
 	void Update () {
+
         Move();
         Rotate();
+        ManaRegen();
 
         if (isDead)
         {
@@ -95,6 +96,19 @@ public class PlayerBehaviour : MonoBehaviour {
         
     }
 
+    public void ManaRegen()
+    {
+        if(currentMana< maxMana)
+        {
+            currentMana += Mathf.RoundToInt(manaRegenRate * Time.deltaTime);
+            if (currentMana > maxMana)
+            {
+                currentMana = maxMana;
+            }
+        }
+        
+    }
+
     // Funções só pro prótipo com um inimigo
     void MainCast (int a)
     {
@@ -106,9 +120,18 @@ public class PlayerBehaviour : MonoBehaviour {
         spellSelector = a;
         SpellSatistics spell;
         spell = spellPrefab[spellSelector].GetComponent<SpellBehaviourBase>().stats;
-
-        Debug.Log(spell);
-
+        
+        if(spell.type != SpellType.Laser)
+        {
+            if(currentMana < spell.manaCost)
+            {
+                return;
+            }
+            else
+            {
+                currentMana -= spell.manaCost;
+            }
+        }
 
         switch (spell.type)
         {           
@@ -134,6 +157,7 @@ public class PlayerBehaviour : MonoBehaviour {
             case SpellType.Laser:
                 go = Instantiate(spellPrefab[spellSelector], targetTransform.position, targetTransform.rotation, targetTransform);
                 go.GetComponent<SpellBehaviourBase>().stats = spell;
+                go.GetComponent<SpellBehaviourLaser>().mouseCall = a;
                 break;
 
             case SpellType.Dash:

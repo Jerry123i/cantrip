@@ -7,12 +7,14 @@ public class SpellBehaviourLaser : SpellBehaviourBase {
     //bool isCritMode;
 
     Transform box;
-    
-	override public void Start () {
+    public int mouseCall;
+    float maxSize;
 
-        base.Start();
 
+	public void Start () {
+        
         box = this.gameObject.GetComponent<Transform>();
+        maxSize = FixAreaValue(stats.area, 0.8f, 5.5f);
 
         if (stats.rollCrit())
         {
@@ -31,10 +33,20 @@ public class SpellBehaviourLaser : SpellBehaviourBase {
             box.localPosition += new Vector3(0.0f, 0.025f, 0.0f);
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(mouseCall) || stats.player.currentMana<=0)
         {
+            stats.player.manaRegenRate = stats.player.initialManaRegenRate;
             Destroy(this.gameObject);
         }
+
+        ManaRemoval();
+
+    }
+
+    void ManaRemoval()
+    {
+        stats.player.manaRegenRate = 0;
+        stats.player.currentMana -= Mathf.RoundToInt(stats.manaCost * Time.deltaTime);
     }
         
     void OnTriggerEnter2D(Collider2D cool)
@@ -86,7 +98,7 @@ public class SpellBehaviourLaser : SpellBehaviourBase {
             hit = coll.GetComponent<EnemyController>();
 
             //Verificar timing de armadura e efeitos de dano over time
-            if (hit.CurrentArmor > 0)
+            if (hit.CurrentArmor > 0 && stats.damage>0)
             {
                 if (stats.armorPierce > 0)
                 {

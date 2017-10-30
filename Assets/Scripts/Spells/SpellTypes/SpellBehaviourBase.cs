@@ -6,9 +6,9 @@ public class SpellBehaviourBase : MonoBehaviour {
 
     public SpellSatistics stats;
 
-    virtual public void Start()
+    public float FixAreaValue(float x, float minValue, float maxValue)
     {
-       // stats = this.GetComponent<SpellSatistics>();
+        return (100 * minValue - maxValue - minValue * x + maxValue * x) / 99;
     }
 
 }

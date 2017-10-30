@@ -39,6 +39,8 @@ public class SpellSatistics : MonoBehaviour {
 
     public float duration;
 
+    public float distance;
+
     private void Awake()
     {
         DontDestroyOnLoad(this);

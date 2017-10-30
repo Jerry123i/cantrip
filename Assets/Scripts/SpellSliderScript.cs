@@ -15,6 +15,7 @@ public class SpellSliderScript : MonoBehaviour {
         if(slider.IsInteractable() == false)
         {
             valueText.text = "";
+            slider.value = slider.minValue;
         }
         else
         {

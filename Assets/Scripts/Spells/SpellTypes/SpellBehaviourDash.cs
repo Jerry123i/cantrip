@@ -7,10 +7,8 @@ public class SpellBehaviourDash : SpellBehaviourBase {
     float clock = 0.0f;
     public float maxDuration=0.15f;
 
-    override public void Start()
+    public void Start()
     {
-        base.Start();
-
         this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x, stats.area, this.gameObject.transform.localScale.z);
 
         if (stats.rollCrit())
@@ -38,7 +36,7 @@ public class SpellBehaviourDash : SpellBehaviourBase {
             EnemyController hit;
             hit = cool.GetComponent<EnemyController>();
 
-            if (hit.CurrentArmor > 0)
+            if (hit.CurrentArmor > 0 && stats.damage>0)
             {
                 hit.LoseArmor(1 + stats.extraArmorDamage);
                 hit.TakeDamage(stats.damage * stats.armorPierce);
