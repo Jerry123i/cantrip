@@ -5,6 +5,7 @@ using UnityEngine;
 public enum SpellType { Shot, Laser, Cone, Bomb, Wave, Teleport, Dash, Mine, Trap };
 
 
+
 public class SpellSatistics : MonoBehaviour {
 
     public PlayerBehaviour player;
@@ -13,7 +14,7 @@ public class SpellSatistics : MonoBehaviour {
     public SpellType type;
 
     public float slowDuration; //Em segundos
-    public float slowPower;    //Multiplicador (entre 0.1 e 0.9)
+    public float slowPower;    //Multiplicador (entre 1 e 0.1)
 
     public float snareDuration; //Em segundos
 
@@ -54,7 +55,7 @@ public class SpellSatistics : MonoBehaviour {
         }
     }
 
-    public bool rollCrit()
+    public bool RollCrit()
     {
         float r;
         r = Random.Range(0, 100);

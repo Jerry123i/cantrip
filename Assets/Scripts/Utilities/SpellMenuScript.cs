@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SpellMenuScript : MonoBehaviour {
 
-    public SpellSatistics spell;
+    public SpellSatistics spellStats;
     public List<SpellSliderScript> sliders;
     public Dropdown typeDropdown;
     public GridLayoutGroup grid;
@@ -23,12 +23,12 @@ public class SpellMenuScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        spell = gameObject.AddComponent(typeof(SpellSatistics)) as SpellSatistics;
+        spellStats = gameObject.AddComponent(typeof(SpellSatistics)) as SpellSatistics;
 
         SetDropdown();
 
         SetSlider(sliders[0], "Slow Power", 0.0f, 100.0f);
-        SetSlider(sliders[1], "Slow Duration", 1.0f, 5.0f);        
+        SetSlider(sliders[1], "Slow Duration", 0.0f, 5.0f);        
         SetSlider(sliders[2], "Snare Duration", 0.0f, 3.0f);
         SetSlider(sliders[3], "Poison Power", 0.0f, 100f);
         SetSlider(sliders[4], "Poison Duration", 1.0f, 10.0f);
@@ -57,26 +57,27 @@ public class SpellMenuScript : MonoBehaviour {
         ConditionalSliders(sliders[14], (typeDropdown.value == (int)SpellType.Shot));
         ConditionalSliders(sliders[13], (typeDropdown.value == (int)SpellType.Wave) || (typeDropdown.value == (int)SpellType.Bomb) || (typeDropdown.value == (int)SpellType.Laser));
         ConditionalSliders(SliderByName("Distance"), (typeDropdown.value == (int)SpellType.Teleport || typeDropdown.value == (int)SpellType.Dash));
+        ConditionalSliders(SliderByName("Trample"), (typeDropdown.value == (int)SpellType.Shot));
 
-        spell.type = (SpellType)typeDropdown.value;
+        spellStats.type = (SpellType)typeDropdown.value;
 
-        spell.slowPower        = 1.0f - 0.0085f * SliderByName("Slow Power").slider.value;
-        spell.slowDuration     = SliderByName("Slow Duration").slider.value;
-        spell.snareDuration    = SliderByName("Snare Duration").slider.value;
-        spell.poisonPower      = SliderByName("Poison Power").slider.value;
-        spell.poisonDuration   = SliderByName("Poison Duration").slider.value;
-        spell.critMultiplier   = SliderByName("Crit Multiplier").slider.value;
-        spell.critChance       = SliderByName("Crit Chance").slider.value;
-        spell.lifeSteal        = SliderByName("Life Steal").slider.value;
-        spell.extraArmorDamage = (int)SliderByName("Extra Armor Damage").slider.value;
-        spell.armorPierce      = SliderByName("Armor Pierce").slider.value;
-        spell.trample          = (int)SliderByName("Trample").slider.value;
-        spell.manaCost         = (int)SliderByName("ManaCost").slider.value;
-        spell.duration         = SliderByName("Duration").slider.value;
-        spell.area             = SliderByName("Area").slider.value;
-        spell.number           = (int)SliderByName("Number").slider.value;
-        spell.damage           = SliderByName("Damage").slider.value;
-        spell.distance         = SliderByName("Distance").slider.value;
+        spellStats.slowPower        = 1.0f - 0.0085f * SliderByName("Slow Power").slider.value;
+        spellStats.slowDuration     = SliderByName("Slow Duration").slider.value;
+        spellStats.snareDuration    = SliderByName("Snare Duration").slider.value;
+        spellStats.poisonPower      = SliderByName("Poison Power").slider.value;
+        spellStats.poisonDuration   = SliderByName("Poison Duration").slider.value;
+        spellStats.critMultiplier   = SliderByName("Crit Multiplier").slider.value;
+        spellStats.critChance       = SliderByName("Crit Chance").slider.value;
+        spellStats.lifeSteal        = SliderByName("Life Steal").slider.value;
+        spellStats.extraArmorDamage = (int)SliderByName("Extra Armor Damage").slider.value;
+        spellStats.armorPierce      = SliderByName("Armor Pierce").slider.value;
+        spellStats.trample          = (int)SliderByName("Trample").slider.value;
+        spellStats.manaCost         = (int)SliderByName("ManaCost").slider.value;
+        spellStats.duration         = SliderByName("Duration").slider.value;
+        spellStats.area             = SliderByName("Area").slider.value;
+        spellStats.number           = (int)SliderByName("Number").slider.value;
+        spellStats.damage           = SliderByName("Damage").slider.value;
+        spellStats.distance         = SliderByName("Distance").slider.value;
 
        
 
@@ -125,54 +126,50 @@ public class SpellMenuScript : MonoBehaviour {
 
     public void BuildSpell()
     {
-        SpellData theData;
-        GameObject completeSpell;
+        SpellData spellData;
+        GameObject spellShell;
+        GameObject spellPrefab;
                 
-        switch (spell.type)
+        switch (spellStats.type)
         {
             case SpellType.Bomb:
-                completeSpell = basicBomb;
+                spellPrefab = basicBomb;
                 break;
 
             case SpellType.Dash:
-                completeSpell = basicDash;
+                spellPrefab = basicDash;
                 break;
 
             case SpellType.Laser:
-                completeSpell = basicLaser;
+                spellPrefab = basicLaser;
                 break;
 
             case SpellType.Shot:
-                completeSpell = basicShot;
+                spellPrefab = basicShot;
                 break;
 
             case SpellType.Teleport:
-                completeSpell = basicTeleport;
+                spellPrefab = basicTeleport;
                 break;
 
             case SpellType.Trap:
-                completeSpell = basicTrap;
+                spellPrefab = basicTrap;
                 break;
 
             case SpellType.Wave:
-                completeSpell = basicWave;
+                spellPrefab = basicWave;
                 break;
 
             default:
-                completeSpell = null;
+                spellPrefab = null;
                 break;
         }
+        
+        spellData = SpellData.CreateInstance<SpellData>();
+        spellData.spellShell = spellPrefab;
+        spellData.spellStats = spellStats;
 
-        completeSpell.GetComponent<SpellBehaviourBase>().stats = spell;
-
-        theData = SpellData.CreateInstance<SpellData>();
-        theData.spellShell = completeSpell;
-        theData.spellStats = spell;
-
-        spellHolder.GetComponent<HolderObjectScript>().spellData.Add(theData);
-
-        Debug.Log("spell eh null?: " + spell);
-        Debug.Log("completeSpell eh null?: " + completeSpell.GetComponent<SpellBehaviourBase>().stats);
+        spellHolder.GetComponent<HolderObjectScript>().spellData.Add(spellData);
     }
 
     public SpellSliderScript SliderByName(string name)

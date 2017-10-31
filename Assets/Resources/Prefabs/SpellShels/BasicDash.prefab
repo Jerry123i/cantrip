@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4547785690743926}
   - component: {fileID: 114033214361415358}
-  - component: {fileID: 114465704084351634}
   - component: {fileID: 212553126191471114}
   - component: {fileID: 61981350293171276}
   m_Layer: 10
@@ -81,35 +80,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   maxDuration: 0.2
---- !u!114 &114465704084351634
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1035040236663082}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9928a2c2bd3427479eb186ba682686c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  type: 6
-  slowDuration: 0
-  slowPower: 0
-  snareDuration: 0
-  poisonDuration: 4
-  poisonPower: 1
-  critMultiplier: 0
-  critChance: 0
-  lifeSteal: 0
-  damage: 0
-  extraArmorDamage: 0
-  armorPierce: 1
-  trample: 0
-  manaCost: 0
-  area: 4
-  number: 0
-  duration: 0
 --- !u!212 &212553126191471114
 SpriteRenderer:
   m_ObjectHideFlags: 1

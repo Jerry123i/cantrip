@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212412583009329488}
   - component: {fileID: 61395402164178862}
   - component: {fileID: 114301355977524982}
-  - component: {fileID: 114945516773382626}
   m_Layer: 10
   m_Name: BasicLaser
   m_TagString: Untagged
@@ -80,35 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
---- !u!114 &114945516773382626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1212902994430560}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9928a2c2bd3427479eb186ba682686c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  type: 1
-  slowDuration: 0
-  slowPower: 0
-  snareDuration: 0
-  poisonDuration: 0
-  poisonPower: 0
-  critMultiplier: 0
-  critChance: 0
-  lifeSteal: 0
-  damage: 5
-  extraArmorDamage: 0
-  armorPierce: 0
-  trample: 0
-  manaCost: 0
-  area: 2.5
-  number: 0
-  duration: 0
+  mouseCall: 0
 --- !u!212 &212412583009329488
 SpriteRenderer:
   m_ObjectHideFlags: 1

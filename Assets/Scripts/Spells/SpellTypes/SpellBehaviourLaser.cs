@@ -14,9 +14,11 @@ public class SpellBehaviourLaser : SpellBehaviourBase {
 	public void Start () {
         
         box = this.gameObject.GetComponent<Transform>();
-        maxSize = FixAreaValue(stats.area, 0.8f, 5.5f);
+        maxSize = FixAreaValue(stats.area, 0.8f, 3.45f);
 
-        if (stats.rollCrit())
+        Debug.Log("Laser Area Fixed: "+ maxSize.ToString());
+
+        if (stats.RollCrit())
         {
             stats.damage *= stats.critMultiplier;
         }
@@ -27,7 +29,7 @@ public class SpellBehaviourLaser : SpellBehaviourBase {
 
         //Extensão do raio
 
-        if(box.localScale.y < stats.area)
+        if(box.localScale.y < maxSize)
         {
             box.localScale += new Vector3(0.0f, 0.05f, 0.0f);
             box.localPosition += new Vector3(0.0f, 0.025f, 0.0f);

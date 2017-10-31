@@ -20,7 +20,7 @@ public class SpellBehaviourShot : SpellBehaviourBase {
     {
         trample = stats.trample;
 
-        if (stats.rollCrit())
+        if (stats.RollCrit())
         {
             stats.damage *= stats.critMultiplier;
             Debug.Log("*CRIT!*");

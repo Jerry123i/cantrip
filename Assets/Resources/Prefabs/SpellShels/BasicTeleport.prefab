@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 212959638363958078}
   - component: {fileID: 58706443836708650}
   - component: {fileID: 114536648680952858}
-  - component: {fileID: 114011709000304802}
   m_Layer: 10
   m_Name: BasicTeleport
   m_TagString: Untagged
@@ -46,35 +45,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114011709000304802
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1434950802563480}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9928a2c2bd3427479eb186ba682686c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  type: 5
-  slowDuration: 0
-  slowPower: 0
-  snareDuration: 0
-  poisonDuration: 0
-  poisonPower: 0
-  critMultiplier: 0
-  critChance: 0
-  lifeSteal: 0
-  damage: 90
-  extraArmorDamage: 0
-  armorPierce: 1
-  trample: 0
-  manaCost: 0
-  area: 10
-  number: 0
-  duration: 0
 --- !u!114 &114536648680952858
 MonoBehaviour:
   m_ObjectHideFlags: 1

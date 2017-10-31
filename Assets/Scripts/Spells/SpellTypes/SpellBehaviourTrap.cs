@@ -27,7 +27,7 @@ public class SpellBehaviourTrap : SpellBehaviourBase {
             ///Dependendo da duração média da trap ela pode ter o dano multiplicado no spawn
             if (!isCritMode)
             {
-                if (stats.rollCrit())
+                if (stats.RollCrit())
                 {
                     StartCoroutine(CritMode());
                 }

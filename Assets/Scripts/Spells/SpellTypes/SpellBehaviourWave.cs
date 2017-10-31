@@ -21,7 +21,7 @@ public class SpellBehaviourWave : SpellBehaviourBase {
 
         growthRate = 0.1f;
 
-        if (stats.rollCrit())
+        if (stats.RollCrit())
         {
             stats.damage *= stats.critMultiplier;
             Debug.Log("*CRIT!*");

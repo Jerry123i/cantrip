@@ -9,9 +9,9 @@ public class SpellBehaviourDash : SpellBehaviourBase {
 
     public void Start()
     {
-        this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x, stats.area, this.gameObject.transform.localScale.z);
+        this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x, stats.distance, this.gameObject.transform.localScale.z);
 
-        if (stats.rollCrit())
+        if (stats.RollCrit())
         {
             stats.damage *= stats.critMultiplier;
             Debug.Log("*CRIT!*");
