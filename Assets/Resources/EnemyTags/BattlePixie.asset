@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: BattlePixie
   m_EditorClassIdentifier: 
-  name: 
+  prefab: {fileID: 1759991436747142, guid: 63a32d446a4b22244aff191118f12614, type: 2}
   groups: 8
   tags: 4

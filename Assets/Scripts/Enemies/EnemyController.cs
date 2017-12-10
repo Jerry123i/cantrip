@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour {
     }
 	[HideInInspector]
 	public float currentSpeed;
-	[HideInInspector]
+	//[HideInInspector]
 	public float currentHp;
 
     public float maxHP;
@@ -132,6 +132,7 @@ public class EnemyController : MonoBehaviour {
 		}
 
 		if (currentHp <= 0) {
+            Debug.Log(this.name + " morreu!");
 			Destroy(this.gameObject);
 		}
 

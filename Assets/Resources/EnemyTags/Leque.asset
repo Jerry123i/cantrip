@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: Leque
   m_EditorClassIdentifier: 
-  name: 
+  prefab: {fileID: 1281973094015624, guid: ac46d178f533b5c4ab9626d4c665791f, type: 2}
   groups: 1
   tags: 1

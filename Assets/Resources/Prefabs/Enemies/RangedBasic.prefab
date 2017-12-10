@@ -107,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939700967908298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.7, y: 7, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224855435385073690}
@@ -273,12 +273,15 @@ MonoBehaviour:
   aiControler: {fileID: 114351721638475810}
   hpBar: {fileID: 114224597771146742}
   armorBar: {fileID: 114341041516108808}
+  atackHitBox: {fileID: 0}
+  atackCooldown: 0
+  onAtackCooldown: 0
+  meleeDmg: 0
   debuffSlow: 0
   debuffPoison: 0
   debuffSnare: 0
   onSnareCD: 0
   onArmorCD: 0
-  currentArmor: 2
   currentSpeed: 1
   currentHp: 10
   maxHP: 10
@@ -290,6 +293,7 @@ MonoBehaviour:
   atkSpeed: 1
   aimObject: {fileID: 1019511059947408}
   isShooting: 0
+  searchRange: 14
   clock: 0
 --- !u!114 &114351721638475810
 MonoBehaviour:

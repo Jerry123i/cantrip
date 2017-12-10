@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: Bezerro
   m_EditorClassIdentifier: 
-  name: 
+  prefab: {fileID: 1803535940847734, guid: 4dea08fe378ad8e4a9451abedbcbb4a3, type: 2}
   groups: 8
   tags: 2

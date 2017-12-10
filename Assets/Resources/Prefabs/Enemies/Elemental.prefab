@@ -65,6 +65,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1831745769341952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4605152926267314}
+  - component: {fileID: 50857666694007630}
+  - component: {fileID: 60454608773411234}
+  - component: {fileID: 114102046755844250}
+  m_Layer: 8
+  m_Name: MeleeEnemyHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1900139731693230
 GameObject:
   m_ObjectHideFlags: 1
@@ -107,13 +125,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1259139581314834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.948, y: 7.285, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224443089643636372}
   - {fileID: 4650414955806356}
+  - {fileID: 4605152926267314}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4605152926267314
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831745769341952}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4419001616387742}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4650414955806356
 Transform:
@@ -148,6 +180,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!50 &50857666694007630
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831745769341952}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58720154247658872
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -163,6 +215,51 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.032280207}
   serializedVersion: 2
   m_Radius: 0.20174003
+--- !u!60 &60454608773411234
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831745769341952}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.015488625, y: 0.63409615}
+      - {x: -0.17935276, y: 0.22547579}
+      - {x: -0.49919367, y: 0.2247715}
+      - {x: -0.44227028, y: 0.11768484}
+      - {x: 0.44227028, y: 0.13300228}
+      - {x: 0.52217007, y: 0.21711254}
+      - {x: 0.22348022, y: 0.22477198}
+--- !u!114 &114102046755844250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831745769341952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a2b9190b1f1744a94cff5b68e70337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  isOn: 0
+  player: {fileID: 0}
 --- !u!114 &114227057346743928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,12 +336,15 @@ MonoBehaviour:
   aiControler: {fileID: 0}
   hpBar: {fileID: 114305189814909448}
   armorBar: {fileID: 114991731222623606}
+  atackHitBox: {fileID: 0}
+  atackCooldown: 0
+  onAtackCooldown: 0
+  meleeDmg: 0
   debuffSlow: 0
   debuffPoison: 0
   debuffSnare: 0
   onSnareCD: 0
   onArmorCD: 0
-  currentArmor: 0
   currentSpeed: 0
   currentHp: 0
   maxHP: 10
@@ -256,6 +356,7 @@ MonoBehaviour:
   atkSpeed: 0.5
   aimObject: {fileID: 1313074103855972}
   isShooting: 0
+  searchRange: 14
   clock: 0
 --- !u!114 &114563153219163510
 MonoBehaviour:

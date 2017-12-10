@@ -35,7 +35,7 @@ public class SpellChoiceSliderScript : MonoBehaviour {
 
     public void GoToGame()
     {
-        SceneManager.LoadScene("pathfindingTest");
+        SceneManager.LoadScene("firstTestScene");
     }
 
 

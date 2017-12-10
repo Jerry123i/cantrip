@@ -13,9 +13,9 @@ public class HolderObjectScript : MonoBehaviour {
 
     public void PrintSpellData()
     {
-        Debug.Log("Print Spell Data");
-        Debug.Log("Data0 - " + spellData[0].spellStats.ToString());
-        Debug.Log("Data1 - " + spellData[1].spellStats.ToString());
+        //Debug.Log("Print Spell Data");
+       // Debug.Log("Data0 - " + spellData[0].spellStats.ToString());
+       // Debug.Log("Data1 - " + spellData[1].spellStats.ToString());
     }
 
 }

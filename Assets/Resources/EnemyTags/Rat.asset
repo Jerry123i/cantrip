@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: Rat
   m_EditorClassIdentifier: 
-  name: 
+  prefab: {fileID: 1934379111074104, guid: 0e570ddf44b071f4faa17a241c2d0278, type: 2}
   groups: 8
   tags: 34

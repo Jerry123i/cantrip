@@ -26,10 +26,11 @@ public class SpellBehaviourLaser : SpellBehaviourBase {
 	}
 	
 	void Update () {
+        
+        ManaRemoval();
 
-        //Extensão do raio
-
-        if(box.localScale.y < maxSize)
+        //Extensão do raio        
+        if (box.localScale.y < maxSize)
         {
             box.localScale += new Vector3(0.0f, 0.05f, 0.0f);
             box.localPosition += new Vector3(0.0f, 0.025f, 0.0f);
@@ -41,7 +42,6 @@ public class SpellBehaviourLaser : SpellBehaviourBase {
             Destroy(this.gameObject);
         }
 
-        ManaRemoval();
 
     }
 

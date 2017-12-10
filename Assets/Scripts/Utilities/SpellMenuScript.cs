@@ -38,7 +38,7 @@ public class SpellMenuScript : MonoBehaviour {
         SetSlider(sliders[8], "Extra Armor Damage", 0.0f, 3.0f, true);
         SetSlider(sliders[9], "Armor Pierce", 0.0f, 50.0f);
         SetSlider(sliders[10], "Trample", 0.0f, 10.0f, true);
-        SetSlider(sliders[11], "ManaCost", 10.0f, 100.0f);
+        SetSlider(sliders[11], "ManaCost", 100.0f, 1000.0f);
         SetSlider(sliders[12], "Duration", 1.5f, 10.0f);
         SetSlider(sliders[13], "Area", 1.0f, 100.0f);
         SetSlider(sliders[14], "Number", 1.0f, 5.0f, true);

@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: Buffer
   m_EditorClassIdentifier: 
-  name: 
+  prefab: {fileID: 1934429267057630, guid: 18ad24d6dd4ee254d88be39ab1bc065d, type: 2}
   groups: 4
   tags: 6

@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: BasicRanged
   m_EditorClassIdentifier: 
-  name: Ranged Slime
+  prefab: {fileID: 1939700967908298, guid: 7358eaab13bad224e8c6125123c23f8c, type: 2}
   groups: 31
   tags: 49

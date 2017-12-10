@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: TouroMecanico
   m_EditorClassIdentifier: 
-  name: "Touro Mec\xE2nico"
+  prefab: {fileID: 1393972689669304, guid: 6d57582422cc0ab49b30cdac732f573a, type: 2}
   groups: 2
   tags: 2

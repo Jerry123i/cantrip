@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: 
-  name: 
+  prefab: {fileID: 1265437437152312, guid: b89e40544f93464469b0a4bf3e0086ba, type: 2}
   groups: 16
   tags: 33

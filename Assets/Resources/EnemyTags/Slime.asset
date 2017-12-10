@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: Slime
   m_EditorClassIdentifier: 
-  name: 
+  prefab: {fileID: 1998834496410908, guid: a477c8ddf3379154eb906a9b6ee0ad4d, type: 2}
   groups: 4
   tags: 34

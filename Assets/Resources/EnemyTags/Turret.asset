@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae7f364c916064da727b013da14c0e, type: 3}
   m_Name: Turret
   m_EditorClassIdentifier: 
-  name: Torreta
+  prefab: {fileID: 1078739765902844, guid: 1bba9a730bd4f00458b51efacd4134af, type: 2}
   groups: 3
   tags: 9

@@ -23,7 +23,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public float manaRegenRate;
     public float initialManaRegenRate;
 
-	public float shotSpreadAngle = 15;
+	float shotSpreadAngle = 15;
 
     [HideInInspector]
     public float angle;
@@ -118,12 +118,17 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void ManaRegen()
     {
-        if(currentMana< maxMana)
+        if(currentMana < maxMana)
         {
+            Debug.Log(Mathf.RoundToInt(manaRegenRate * Time.deltaTime).ToString());
             currentMana += Mathf.RoundToInt(manaRegenRate * Time.deltaTime);
             if (currentMana > maxMana)
             {
                 currentMana = maxMana;
+            }
+            if (currentMana < 0)
+            {
+                currentMana = 0;
             }
         }
         
@@ -273,6 +278,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void Shot(SpellSatistics spell)
     {
+        Debug.Log("Angle: " + shotSpreadAngle.ToString());
         GameObject go;
 
         Debug.Log(spell.ToString());
